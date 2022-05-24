@@ -1,0 +1,57 @@
+<div id="burbujas">
+    <div class="burbuja x1"></div>
+    <div class="burbuja x2"></div>
+    <div class="burbuja x3"></div>
+    <div class="burbuja x4"></div>
+    <div class="burbuja x5"></div>
+</div>
+<div class="container-fluid d-flex justify-content-center align-items-center">
+    <form class="_form" [formGroup]="buscar_form">
+        <div class="wrap_input_form">
+            <input aria-label="buscar" class="input_form" type="text" name="termino" placeholder="Buscar" formControlName="termino">
+            <span class="focus_input_form"></span>
+            <span class="icono_input_form">
+                <i class="fa fa-search" aria-hidden="true"></i>
+            </span>
+        </div>
+        <fieldset class="grid_contenedor pt-3 pb-3">
+            <legend class="d-none">Buscar por</legend>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="tipo_busqueda" id="productos" value="productos" checked>
+                <label class="form-check-label" for="productos">
+                    Productos
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="tipo_busqueda" id="vendedores" value="vendedores">
+                <label class="form-check-label" for="vendedores">
+                    Vendedores
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="tipo_busqueda" id="blogs" value="blogs">
+                <label class="form-check-label" for="blogs">
+                    Blogs
+                </label>
+            </div>
+        </fieldset>
+
+        <div class="pt-3 d-flex justify-content-center align-items-center">
+            <button class="btn form_btn" (click)="buscar()">
+                Buscar
+            </button>
+        </div>
+    </form>
+</div>
+
+<div class="container py-5" *ngIf="resultados_listos">
+    <div class="grid_contenedor mt-5">
+        <div *ngFor="let resultado of resultados_busqueda">
+            <div [ngSwitch]="tipo_busqueda">
+                <app-product-cards [producto]="resultado" *ngSwitchCase="'productos'"></app-product-cards>
+                <app-blogs-cards [blog]="resultado" *ngSwitchCase="'blogs'"></app-blogs-cards>
+                <app-creador-contenido-card [creador_contenido]="resultado" *ngSwitchCase="'vendedores'"></app-creador-contenido-card>
+            </div>
+        </div>
+    </div>
+</div>

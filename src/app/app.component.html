@@ -1,0 +1,14 @@
+<app-navbar *ngIf="mostrar_nav"></app-navbar>
+<app-nav-sidebar *ngIf="mostrar_sidebar"></app-nav-sidebar>
+<router-outlet *ngIf="!mostrar_sidebar"></router-outlet>
+
+<div *ngIf="mostrar_sidebar" class="row bg-light min-vh-100 p-0 m-0">
+    <div class="col-12 col-lg-3 mt-3">
+        <app-sidebar></app-sidebar>
+    </div>
+    <div class="col-12 col-lg-9 mt-3">
+        <div class="container-fluid p-0 m-0">
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+</div>

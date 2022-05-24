@@ -1,0 +1,25 @@
+td {
+    display: grid;
+    grid-template-columns: 1fr;
+}
+
+.tabla_imagenes td {
+    display: inline-block;
+}
+
+input:not([type=color]) {
+    box-sizing: border-box;
+    width: 100%
+}
+
+
+img {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 5px;
+    width: 150px;
+}
+
+.text-muted{
+    color: #5A6168 !important;
+}

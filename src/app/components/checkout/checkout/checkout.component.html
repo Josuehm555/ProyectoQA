@@ -1,0 +1,71 @@
+<div class="container">
+
+    <div class="m-5">
+        <img src="../../../../assets/img/logo.png" class="imagen" alt="Logo Audiophistic">
+    </div>
+
+    <nav aria-label="breadcrumb" class="bg-light p-2 rounded">
+        <ol class="breadcrumb ps-5 pt-2">
+            <li class="breadcrumb-item" [ngClass]="{'active': pagina_actual == 1}"><a
+                    (click)="cambiar_pagina(1)">Dirección</a></li>
+            <li class="breadcrumb-item" [ngClass]="{'active': pagina_actual == 2}"><a
+                    (click)="cambiar_pagina(2)">Pago</a></li>
+        </ol>
+    </nav>
+
+    <div class="row mt-5">
+        <div class="col-md-5 col-lg-4 order-md-last">
+            <h4 class="d-flex justify-content-between align-items-center mb-3">
+                <span class="texto_rosado">Carrito</span>
+                <span class="badge rounded-pill bg_rosado">{{carrito.length}}</span>
+            </h4>
+            <ul class="list-group mb-3" *ngFor="let producto of carrito">
+                <li class="d-flex justify-content-between p-4 border-bottom">
+                    <div class=" d-flex justify-content-start">
+                        <div class="d-none d-sm-block">
+                            <span class="badge rounded-pill bg-dark ms-3 badge_producto"
+                                *ngIf="producto.cantidad != -1">{{producto.cantidad}}</span>
+                            <img [src]="producto.imagen" style="max-height: 50px;" alt="Imagen Producto">
+                        </div>
+
+                        <div class="ms-3">
+                            <h6 class="my-0">{{producto.titulo}}</h6>
+                            <small class="text-muted">{{producto.nombre_estilo}}</small>
+                        </div>
+                    </div>
+                    <span class="text-muted ms-3">{{producto.precio | precioCantidad: producto.cantidad |
+                        currency:'CRC':'symbol-narrow' }}</span>
+                </li>
+            </ul>
+            <ul class="list-unstyled mb-4">
+                <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">
+                        Subtotal </strong><strong>{{precio_total | precioSubtotal |
+                        currency:'CRC':'symbol-narrow'}}</strong></li>
+                <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Costos de
+                        envío</strong><strong>{{precio_envio | currency:'CRC':'symbol-narrow'}}</strong>
+                </li>
+                <li class="d-flex justify-content-between py-3 border-bottom"><strong
+                        class="text-muted">Impuesto</strong><strong> {{precio_total | precioImpuesto |
+                        currency:'CRC':'symbol-narrow'}}
+                    </strong></li>
+                <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Total</strong>
+                    <h5 class="font-weight-bold">{{precio_total | precioTotal: precio_envio |
+                        currency:'CRC':'symbol-narrow'}}</h5>
+                </li>
+            </ul>
+        </div>
+        <div class="col-md-7 col-lg-8" *ngIf="sub_form_creado">
+            <form [formGroup]="checkout_form">
+                <app-checkout-direccion *ngIf="pagina_actual == 1" (mensaje_padre)="recibir_mensaje($event)"
+                    [enviado]="enviado" (misma_direccion_evento)="cambiar_direccion($event)">
+                </app-checkout-direccion>
+            </form>
+            <form [formGroup]="pago_form">
+                <app-checkout-pago *ngIf="pagina_actual == 2" (mensaje_padre)="recibir_mensaje($event)"
+                    [enviado]="enviado" [misma_direccion]="misma_direccion" [cargando]="cargando">
+                </app-checkout-pago>
+            </form>
+        </div>
+
+    </div>
+</div>

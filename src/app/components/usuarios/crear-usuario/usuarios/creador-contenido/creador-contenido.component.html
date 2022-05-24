@@ -1,0 +1,74 @@
+<div [formGroup]="creador_contenido_form">
+    <div class="form-group">
+        <label for="nombre"><i class="fas fa-id-card"></i>Nombre</label>
+        <input type="text" placeholder="Nombre" name="nombre" formControlName="nombre" class="form-control" required
+            [ngClass]="{ 'is-invalid': enviado && form.nombre.errors }">
+        <div *ngIf="enviado && form.nombre.errors" class="invalid-feedback">
+            <div *ngIf="form.nombre.errors.required">
+                <label class="font-weight-bold"><i class="fa fa-exclamation-circle"></i> El campo
+                    de nombre es obligatorio</label>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="correo"><i class="fas fa-at"></i>Correo Electrónico</label>
+        <input type="email" placeholder="Correo Electrónico" name="correo" formControlName="correo" class="form-control"
+            required [ngClass]="{ 'is-invalid': enviado && form.correo.errors }"
+            pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$">
+        <div *ngIf="enviado && form.correo.errors" class="invalid-feedback">
+            <div *ngIf="form.correo.errors.required">
+                <label class="font-weight-bold"><i class="fa fa-exclamation-circle"></i> El campo
+                    de correo es obligatorio</label>
+            </div>
+            <div *ngIf="enviado && form.correo.errors" class="text-danger mb-3">
+                <div *ngIf="form.correo.errors.pattern">
+                    <label class="font-weight-bold"><i class="fa fa-exclamation-circle"></i> El
+                        campo de correo es inválido</label>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div formGroupName="caracteristicas">
+        <div class="form-group">
+            <label for="imagen"><i class="fas fa-camera"></i>Imagen</label>
+            <br>
+            <input type="file" accept="image/png, image/jpeg, image/jpg" (change)="leer_imagen($event)"
+                formControlName="imagen">
+            <br>
+            <img *ngIf="form_caracteristicas.imagen.value.includes('data:image/')" [src]="obtener_imagen()"
+            alt="Logo Seleccionado Vendedor">
+        </div>
+        <div class="form-group">
+            <label for="celular"><i class="fas fa-phone"></i>Teléfono</label>
+            <input type="text" placeholder="Teléfono" name="celular" formControlName="celular" class="form-control"
+                required [ngClass]="{ 'is-invalid': enviado && form_caracteristicas.celular.errors }">
+            <div *ngIf="enviado && form_caracteristicas.celular.errors" class="invalid-feedback">
+                <div *ngIf="form_caracteristicas.celular.errors.required">
+                    <label class="font-weight-bold"><i class="fa fa-exclamation-circle"></i> El campo
+                        de teléfono es obligatorio</label>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="sitio_web"><i class="fas fa-link"></i>Sitio Web <span
+                    class="text-muted">(opcional)</span></label>
+            <input type="text" class="form-control" placeholder="Sitio Web" name="sitio_web"
+                formControlName="sitio_web">
+        </div>
+        <div class="form-group">
+            <label for="descripcion"><i class="fas fa-info-circle"></i>Descripción</label>
+            <div class="form-floating">
+                <textarea class="form-control" id="descripcion" name="descripcion" formControlName="descripcion"
+                    required [ngClass]="{ 'is-invalid': enviado && form_caracteristicas.descripcion.errors }">
+            </textarea>
+                <label for="descripcion">Descripción</label>
+                <div *ngIf="enviado && form_caracteristicas.descripcion.errors" class="invalid-feedback">
+                    <div *ngIf="form_caracteristicas.descripcion.errors.required">
+                        <label class="font-weight-bold"><i class="fa fa-exclamation-circle"></i> El campo
+                            de descripción es obligatorio</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,41 @@
+<div class="container-flex mt-3 mb-3">
+
+    <h3><i class="fas fa-comment"></i> Comentarios </h3>
+
+    <h5 class="text-muted m-5" *ngIf="resenas.length == 0"> No hay comentarios </h5>
+
+    <div class="row">
+        <div class="col-12 col-md-8">
+            <div class="comentario" *ngFor="let resena of resenas">
+                <div class="bg_gris p-5">
+                    <div class="mb-3">
+                        <h5 class="h5 mb-0">{{resena.nombre_autor}}</h5>
+                        <small>{{resena.fecha | date:'dd/MM/yyyy HH:mm a':'-1200'}}</small>
+                    </div>
+
+                    <app-estrellas [calificacion]="resena.calificacion"></app-estrellas>
+
+                    <p>{{resena.comentario}}</p>
+
+                    <ul class="list-inline d-sm-flex my-0" *ngIf="resena.es_autor_actual">
+                        <li class="list-inline-item g-mr-20">
+                            <a class="btn btn-outline-success m-1" (click)="abrir_modal_resena()"><i
+                                    class="fas fa-pen"></i></a>
+                        </li>
+                        <li class="list-inline-item g-mr-20">
+                            <a class="btn btn-outline-danger m-1" (click)="abrir_modal_eliminar()"><i
+                                    class="fas fa-trash"></i></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="mt-3" *ngIf="cargar_mas">
+            <button type="button" class="btn form_btn" (click)="consultar_resenas()" [disabled]="cargando_comentarios">
+                <span *ngIf="cargando_comentarios" class="spinner-border spinner-border-sm" role="status"
+                    aria-hidden="true"></span>
+                Cargar comentarios...
+            </button>
+        </div>
+    </div>
+</div>

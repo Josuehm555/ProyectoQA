@@ -1,0 +1,22 @@
+<div class="d-flex justify-content-center">
+    <div class="content text-center">
+        <div class="calificacion"> <span class="producto_calificacion">{{producto.calificacion}}</span><span>/5</span>
+            <app-estrellas [calificacion]="producto.calificacion"></app-estrellas>
+            <div class="texto_calificacion text-muted"> <span>{{producto.cantidad_resenas}} reseñas</span> </div>
+        </div>
+    </div>
+</div>
+<div class="d-flex justify-content-center align-items-center">
+    <div class="grid_contenedor">
+        <div class="criterio" *ngFor="let calificacion of producto.calificaciones">
+            <span>{{calificacion.nombre_criterio}}</span>
+            <app-estrellas [calificacion]="calificacion.calificacion"></app-estrellas>
+        </div>
+    </div>
+</div>
+<div class="mt-3 d-flex justify-content-center align-items-center" *ngIf="!mi_resena && sesion">
+    <button class="form_btn btn btn-default" type="button" (click)="abrir_modal_resena()">
+        Escribir Reseña
+        <i class="ms-3 fas fa-comment-dots"></i>
+    </button>
+</div>

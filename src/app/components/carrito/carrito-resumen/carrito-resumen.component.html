@@ -1,0 +1,43 @@
+<div class="container collapse fade" #collapse="ngbCollapse" [(ngbCollapse)]="colapsado">
+    <div class="carrito_compras" [ngStyle]="{ right: sesion ? '80px' : '150px' }">
+        <div>
+            <div class="carrito_compras_encabezado d-none d-md-block">
+                <i class="fa fa-shopping-cart carrito_icono"></i>
+                <div class="carrito_compras_total">
+                    <span class="text-muted">Total:</span>
+                    <span class="ps-2 color_texto">{{precio_total | currency:'CRC':'symbol-narrow'}}</span>
+                    <br>
+                    <small class="text-muted">*No incluye costo de envío</small>
+                </div>
+            </div>
+        </div>
+        <br>
+        <hr>
+        <div class="table-responsive contenedor">
+            <table class="carrito_compras_items">
+                <tbody *ngFor="let producto of carrito">
+                    <tr>
+                        <td class="text-center">
+                            <img [src]="producto.imagen" alt="Imagen Producto" />
+                        </td>
+                        <span class="item-nombre">{{producto.titulo}}</span>
+                        <span class="item-precio">{{producto.precio | precioCantidad: producto.cantidad | currency:'CRC':'symbol-narrow' }}</span>
+                        <span class="item-cantidad" *ngIf="producto.cantidad != -1" class="text-muted">
+                            Cantidad: {{producto.cantidad}}</span>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <hr>
+        <div class="d-flex align-items-center justify-content-center text-center">
+            <div class="w-100">
+                <a class="btn form_btn" href="/carrito">
+                    Ver Carrito
+                </a>
+            </div>
+        </div>
+
+    </div>
+    <!-- collap-content -->
+</div>
+<!-- collap -->

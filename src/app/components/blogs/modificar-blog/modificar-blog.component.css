@@ -1,0 +1,36 @@
+.contenedor_editor {
+    background-color: white !important;
+}
+
+.botones_navegacion {
+    margin-top: 5%;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+}
+
+.form-group {
+    margin-top: 20px;
+}
+
+.form-group label {
+    margin-bottom: 10px;
+}
+
+.form-group label i {
+    margin-right: 10px;
+}
+
+.btn i {
+    margin-right: 5px;
+}
+
+.bs-stepper-label {
+    color: #666F75 !important;
+}
+
+@media screen and (max-width: 576px) {
+    .bs-stepper-header {
+        display: block;
+    }
+}

@@ -1,0 +1,57 @@
+
+body {
+    margin-top: 20px;
+    background: #eee;
+}
+
+h3 {
+    font-size: 20px;
+}
+
+.texto_titulo {
+    color: var(--gris_oscuro);
+}
+
+table.carrito_tabla {
+    margin-bottom: 0;
+}
+
+table.carrito_tabla tr td {
+    border: none;
+    text-align: right;
+    padding-right: 30px;
+}
+
+table.carrito_tabla tr td.desc, table.carrito_tabla tr td:first-child {
+    text-align: left;
+}
+
+table.carrito_tabla tr td:last-child {
+    width: 80px;
+}
+
+.carrito_contenido {
+    padding: 15px 20px 20px 20px;
+    border-color: #e7eaec;
+    border-image: none;
+    border-style: solid solid none;
+    border-width: 1px 0;
+}
+
+@media screen and (max-width: 770px) {
+    .carrito_contenido {
+        width: 100%;
+        padding: 0;
+        margin: 0;
+    }
+    table.carrito_tabla tr td {
+        display: block;
+    }
+    .form_btn{
+        min-width: 100%;
+    }
+}
+
+/*Referencias: 
+https://www.bootdey.com/snippets/view/shopping-cart-checkout#html 
+https://therichpost.com/angular-11-bootstrap-4-mini-cart-inside-modal/ */

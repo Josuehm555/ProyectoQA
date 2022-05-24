@@ -1,0 +1,25 @@
+<div [formGroup]="consumidor_form">
+    <div formGroupName="caracteristicas">
+        <div class="form-group">
+            <label for="celular"><i class="fas fa-phone"></i>Teléfono</label>
+            <input id="celular" type="text" placeholder="Teléfono" name="celular" formControlName="celular" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="calendario"><i class="fas fa-calendar"></i>Fecha de Cumpleaños</label>
+            <div class="input-group">
+                <input id="calendario" class="form-control" placeholder="dd/mm/yyyy" name="calendario" #calendario="ngModel" [(ngModel)]="modelo" ngbDatepicker #calendario_fecha="ngbDatepicker" placement="left" [positionTarget]="boton_calendario" [minDate]="{year: 1940, month: 1, day: 1}"
+                    [maxDate]="{year: ano_actual - 13, month: 12, day: 31}" [ngModelOptions]="{standalone: true}" (ngModelChange)="cambiar_fecha()">
+                <div class="input-group-append">
+                    <button aria-label="calendario_boton" #boton_calendario class="btn btn-outline-secondary fas fa-calendar" (click)="calendario_fecha.toggle()" type="button"></button>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="direccion_exacta"><i class="fas fa-thumbtack"></i>Dirección Exacta<span class="text-muted">
+                    (opcional)</span></label>
+            <div>
+                <textarea class="form-control" id="direccion_exacta" name="direccion_exacta" formControlName="direccion_exacta" placeholder="Dirección Exacta"></textarea>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,13 @@
+.calificacion {
+    padding: 54px;
+}
+
+.blog_calificacion {
+    font-size: 50px
+}
+
+.texto_calificacion {
+    margin-top: 10px
+}
+
+/*Referencia: https://freefrontend.com/bootstrap-star-ratings/*/

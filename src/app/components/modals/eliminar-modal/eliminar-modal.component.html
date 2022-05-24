@@ -1,0 +1,24 @@
+<div class="modal_confirmar">
+    <div class="modal-content">
+        <div class="container d-flex justify-content-end">
+            <button type="button" [disabled]="cargando" class="btn" data-dismiss="modal" (click)="cerrar_modal_cancelar()">&times;</button>
+        </div>
+        <div class="modal-header">
+            <h4 class="modal-title w-100 m-0">
+                <div class="icon-box justify-content-center align-items-center d-lg-flex d-none d-lg-block pb-4">
+                    <i class="far fa-times-circle"></i>
+                </div>
+                Eliminar {{datos_eliminar.eliminar}}
+            </h4>
+        </div>
+        <div class="modal-body">
+            <p>{{datos_eliminar.mensaje}}</p>
+        </div>
+        <div class="modal-footer justify-content-center">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                (click)="cerrar_modal_cancelar()" [disabled]="cargando">Cancelar</button>
+            <button type="button" class="btn btn-danger" (click)="eliminar()" [disabled]="cargando">
+                <i *ngIf="cargando" class="fas fa-sync fa-spin"></i>Eliminar</button>
+        </div>
+    </div>
+</div>

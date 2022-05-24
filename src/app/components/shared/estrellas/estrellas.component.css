@@ -1,0 +1,7 @@
+.estrellas span {
+    font-size: 18px;
+}
+
+.seleccionada {
+    color: sandybrown !important;
+}

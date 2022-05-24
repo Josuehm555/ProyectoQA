@@ -1,0 +1,141 @@
+<div class="container">
+    <div class="card">
+        <div class="card-body">
+            <div>
+                <div class="row" [formGroup]="usuario_form">
+                    <div class="col-12 col-sm-auto mb-3" *ngIf="sub_form_creado">
+                        <div class="mx-auto" formGroupName="caracteristicas">
+                            <div class="d-flex justify-content-center align-items-center rounded" style="height: 140px; width: 140px; background-color: rgb(233, 236, 239);" *ngIf="rol != '2'">
+                                <span style="color: rgb(166, 168, 170); font: bold 8pt Arial;"></span>
+                            </div>
+                            <div *ngIf="rol == '2'">
+                                <img *ngIf="form_caracteristicas.imagen.value.includes('data:image/')" [src]="obtener_imagen()" alt="Foto de Perfil">
+                                <div class="mt-2" *ngIf="rol == '2'">
+                                    <label class="btn btn-primary" for="selector">
+                                        <input id="selector" type="file" class="d-none"
+                                            accept="image/png, image/jpeg, image/jpg" (change)="leer_imagen($event)"
+                                            formControlName="imagen_entrada">
+                                        <i class="fa fa-fw fa-camera me-2"></i>
+                                        <span>Cambiar Foto</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col d-flex flex-column flex-sm-row justify-content-between mb-3">
+                        <div class="text-sm-left mb-2 mb-sm-0" [ngSwitch]="rol">
+                            <h4 class="pt-sm-2 pb-1 mb-0 text-nowrap">{{usuario.nombre}}</h4>
+                            <span> {{usuario.correo}} </span> <br>
+                            <span class="text-muted" *ngSwitchCase="'1'">Administrador</span>
+                            <span class="text-muted" *ngSwitchCase="'2'">Creador de Contenido</span>
+                            <span class="text-muted" *ngSwitchCase="'3'">Consumidor</span>
+                        </div>
+                    </div>
+                </div>
+                <ul class="nav nav-tabs mt-3">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="configuracion-tab" data-bs-toggle="tab" data-bs-target="#configuracion" type="button" role="tab" aria-controls="configuracion" aria-selected="true">Configuración General</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="contrasena-tab" data-bs-toggle="tab" data-bs-target="#cambiar_contrasena" type="button" role="tab" aria-controls="cambiar_contrasena" aria-selected="false">Contraseña</button>
+                    </li>
+                </ul>
+                <div class="tab-content pt-3">
+                    <div class="tab-pane fade show active p-3" id="configuracion">
+                        <form [formGroup]="usuario_form">
+                            <div class="form-group">
+                                <label for="nombre"><i class="fas fa-id-card"></i>Nombre</label>
+                                <input id="nombre" type="text" placeholder="Nombre" name="nombre" formControlName="nombre" class="form-control" required [ngClass]="{ 'is-invalid': enviado && form.nombre.errors }">
+                                <div *ngIf="enviado && form.nombre.errors" class="invalid-feedback">
+                                    <div *ngIf="form.nombre.errors.required">
+                                        <label class="font-weight-bold"><i class="fa fa-exclamation-circle"></i> El
+                                            campo
+                                            de nombre es obligatorio</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div *ngIf="sub_form_creado">
+                                <div [ngSwitch]="rol">
+                                    <app-administrador-perfil *ngSwitchCase="'1'" [formGroup]="usuario_form" [enviado]="enviado">
+                                    </app-administrador-perfil>
+                                    <app-creador-contenido-perfil *ngSwitchCase="'2'" [formGroup]="usuario_form" [enviado]="enviado"></app-creador-contenido-perfil>
+                                    <app-consumidor-perfil *ngSwitchCase="'3'" [formGroup]="usuario_form" [enviado]="enviado">
+                                    </app-consumidor-perfil>
+                                </div>
+                                <div *ngIf="rol == '2' || rol == '3'">
+                                    <div class="form-group">
+                                        <label for="provincia"><i class="fas fa-map-marker"></i>Provincia</label>
+                                        <select class="form-select form-control" id="provincia" (change)="obtener_cantones($any($event.target).value, '')" name="provincia" [(ngModel)]="provincia" [ngModelOptions]="{standalone: true}">
+                                            <option *ngFor="let prov of provincias; let i = index" [value]="prov.id">
+                                                {{prov.nombre}}</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="canton"><i class="fas fa-map-marker-alt"></i>Cantón</label>
+                                        <select class="form-select form-control" id="canton" name="canton" [(ngModel)]="canton" [ngModelOptions]="{standalone: true}">
+                                            <option *ngFor="let cant of cantones; let i = index" [value]="cant.id">
+                                                {{cant.nombre}}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr />
+                            <div class="row mt-5">
+                                <div class="col d-flex justify-content-end">
+                                    <button class="btn btn-primary" (click)="editar_perfil()" [disabled]="cargando">
+                                        <i *ngIf="cargando" class="fas fa-sync fa-spin"></i>Guardar Cambios</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="tab-pane fade show p-3" id="cambiar_contrasena">
+                        <form [formGroup]="contrasena_form">
+                            <div class="mb-2"><b>Cambiar Contraseña</b></div>
+                            <div class="row">
+                                <div class="col">
+                                    <div class="form-group">
+                                        <label id="contrasena_label" for="contrasena"><i class="fas fa-lock"></i>Nueva Contraseña</label>
+                                        <input type="password" placeholder="Contraseña" name="contrasena" formControlName="contrasena" class="form-control" required [ngClass]="{ 'is-invalid': enviado && form_contrasena.contrasena.errors }" aria-labelledby="contrasena_label">
+                                        <div *ngIf="enviado && form_contrasena.contrasena.errors" class="invalid-feedback">
+                                            <div *ngIf="form_contrasena.contrasena.errors.required">
+                                                <label class="font-weight-bold"><i class="fa fa-exclamation-circle"></i>
+                                                    El campo
+                                                    de contraseña es obligatorio</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <div class="form-group">
+                                        <label id="nueva_contrasena_label" for="confirmar"><i class="fas fa-unlock"></i>Confirmar
+                                            Contraseña</label>
+                                        <input type="password" placeholder="Contraseña" name="confirmar" formControlName="confirmar" class="form-control" required [ngClass]="{ 'is-invalid': enviado && form_contrasena.confirmar.errors }" aria-labelledby="nueva_contrasena_label">
+                                        <div *ngIf="enviado && form_contrasena.confirmar.errors" class="invalid-feedback">
+                                            <div *ngIf="form_contrasena.confirmar.errors.required">
+                                                <label class="font-weight-bold"><i class="fa fa-exclamation-circle"></i>
+                                                    El campo
+                                                    de contraseña es obligatorio</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr />
+                            <div class="row mt-5">
+                                <div class="col d-flex justify-content-end">
+                                    <button class="btn btn-primary" (click)="cambiar_contrasena()" [disabled]="cargando">
+                                        <i *ngIf="cargando" class="fas fa-sync fa-spin"></i>Guardar Cambios</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--Referencia: https://www.bootdey.com/snippets/view/bs4-edit-profile-page-->

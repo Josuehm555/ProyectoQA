@@ -1,0 +1,68 @@
+<div *ngIf="mostrar_nav_espacio" class="mt-3 d-none d-lg-block"></div>
+<nav *ngIf="mostrar_nav" class="navbar navbar-expand-lg pl-5 navbar-dark text-white" id="nav_principal">
+    <div class="container-fluid">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mb-2 col-md-7">
+                <li class="nav-item" *ngIf="mostrar_nav_espacio">
+                    <a class="nav-link navbar-brand" href="#"><img src="../../../../assets/img/logo.png" width="120" alt="Logo Audiophistic"></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/audifonos">Audífonos</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/parlantes">Parlantes</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/albumes">Álbumes</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/blogs">Blogs</a>
+                </li>
+                <div class="d-block d-lg-none">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <i class="fas fa-search icon-menu"></i> Buscar
+                        </a>
+                    </li>
+                    <li class="nav-item" *ngIf="rol == '3'">
+                        <a class="nav-link" onclick="location.href='/carrito'"><i
+                                class="fas fa-shopping-cart icon-menu"></i>
+                            Carrito</a>
+                    </li>
+                    <li class="nav-item">
+                        <a *ngIf="!sesion" class="nav-link" href="/iniciar-sesion" aria-label="Ir a iniciar sesión">
+                            <i class="fas fa-sign-in-alt icon-menu me-2"></i>Ingresar</a>
+
+                        <a *ngIf="sesion" class="nav-link" href="/inicio" aria-label="Ir a menú usuario">
+                            <i class="fas fa-user me-3"></i>{{nombre}}
+                        </a>
+                    </li>
+                </div>
+            </ul>
+            <div class="col-md-5 text-end">
+                <div class="d-none d-lg-block">
+                    <button type="button" class="btn me-2" onclick="location.href='/home'" aria-label="home_boton"><i class="fas fa-home"></i></button>
+                    <button type="button" class="btn me-2" onclick="location.href='/buscar'" aria-label="buscar_boton"><i class="fas fa-search"></i></button>
+                    <button *ngIf="rol == '3'" type="button" class="btn me-2 position-relative" (click)="abrir_cerrar_carrito()">
+                        <i class="fas fa-shopping-cart"></i> <span
+                            class="rounded-pill badge position-absolute top-0 left-0 translate-middle bg-dark">{{cantidad_carrito}}</span>
+                    </button>
+                    <button *ngIf="!sesion" type="button" class="btn btn-light iniciar_sesion" onclick="location.href='/iniciar-sesion'" aria-label="Ir a iniciar sesión">
+                        <span class="text-dark">Iniciar Sesión</span>
+                    </button>
+                    <button *ngIf="sesion" type="button" class="btn me-2 boton" onclick="location.href='/inicio'" aria-label="ir al menú Usuario">
+                        <i class="fas fa-user p-3"></i>
+                        {{nombre}}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<div *ngIf="rol == '3'">
+    <app-carrito-resumen class="d-none d-lg-block"></app-carrito-resumen>
+</div>

@@ -1,0 +1,32 @@
+<div class="container min-vh-100">
+    <div class="perfil rounded">
+        <div class="perfil_img d-none d-lg-block" id="profile_pic"></div>
+        <div class="perfil_encabezado">
+            <div class="nombre_usuario">{{usuario.nombre}}</div>
+            <div class="text-muted" *ngIf="usuario.caracteristicas.hasOwnProperty('provincia')">
+                <i class="fas fa-map-marker-alt p-3"></i>{{usuario.caracteristicas.canton}},
+                {{usuario.caracteristicas.provincia}}
+            </div>
+        </div>
+        <ul class="nav nav-tabs m-5" id="general_tab" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#general-tab" type="button"
+                    role="tab">General</button>
+            </li>
+        </ul>
+        <div class="tab-content m-5" id="general_tab_contenido">
+            <div class="tab-pane fade show active" id="general-tab" role="tabpanel">
+                <div class="grid_contenedor">
+                    <div *ngFor="let caract of caracteristicas">
+                        <div class="texto">
+                            <div class="fw-bold">{{caract.caracteristica}}</div>
+                            <div>{{caract.valor}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="p-5 pb-3">Icons made by <a href="https://www.flaticon.com/authors/freepik">Freepik</a> from <a
+                href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
+    </div>
+</div>

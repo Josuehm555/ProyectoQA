@@ -1,0 +1,146 @@
+<div [formGroup]="parlantes_form">
+    <div class="form-group">
+        <label for="tipo"><i class="fas fa-heading"></i>Título</label>
+        <input type="text" class="form-control" placeholder="Título" name="titulo" formControlName="titulo" required
+            [ngClass]="{ 'is-invalid': enviado && form.titulo.errors }">
+        <div *ngIf="enviado && form.titulo.errors" class="invalid-feedback">
+            <div *ngIf="form.titulo.errors.required">
+                <label class="font-weight-bold"><i class="fa fa-exclamation-circle"></i> El campo
+                    de título es obligatorio</label>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="tipo"><i class="fas fa-coins"></i>Precio<span class="text-muted"> (en colones)</span></label>
+        <input type="number" class="form-control" placeholder="Precio" name="precio" formControlName="precio" required
+            [ngClass]="{ 'is-invalid': enviado && form.precio.errors }" (blur)="transformar_dinero($event)"
+            min="1000">
+        <div *ngIf="enviado && form.precio.errors" class="invalid-feedback">
+            <div *ngIf="form.precio.errors.required">
+                <label class="font-weight-bold"><i class="fa fa-exclamation-circle"></i> El campo
+                    de precio es obligatorio</label>
+            </div>
+        </div>
+    </div>
+    <div>Precio: <span>{{precio}}</span></div>
+    <div class="form-group">
+        <label for="tipo"><i class="far fa-calendar-alt"></i>Año de lanzamiento</label>
+        <input type="number" class="form-control" placeholder="Año de lanzamiento" name="fecha_lanzamiento"
+            formControlName="fecha_lanzamiento" required
+            [ngClass]="{ 'is-invalid': enviado && form.fecha_lanzamiento.errors }">
+        <div *ngIf="enviado && form.fecha_lanzamiento.errors" class="invalid-feedback">
+            <div *ngIf="form.fecha_lanzamiento.errors.required">
+                <label class="font-weight-bold"><i class="fa fa-exclamation-circle"></i> El campo
+                    de año de lanzamiento es obligatorio</label>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="tipo"><i class="fas fa-truck-loading"></i>Tiempo de Envío (en días) <span class="text-muted">
+                (aprox.)</span></label>
+        <input type="number" class="form-control" placeholder="Envío" name="tiempo_envio" formControlName="tiempo_envio"
+            required [ngClass]="{ 'is-invalid': enviado && form.tiempo_envio.errors }">
+        <div *ngIf="enviado && form.tiempo_envio.errors" class="invalid-feedback">
+            <div *ngIf="form.tiempo_envio.errors.required">
+                <label class="font-weight-bold"><i class="fa fa-exclamation-circle"></i> El campo
+                    de tiempo de envío es obligatorio</label>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="descripcion"><i class="fas fa-info-circle"></i>Descripción</label>
+        <textarea class="form-control" id="descripcion" name="descripcion" formControlName="descripcion" required
+            [ngClass]="{ 'is-invalid': enviado && form.descripcion.errors }">
+            </textarea>
+        <div *ngIf="enviado && form.descripcion.errors" class="invalid-feedback">
+            <div *ngIf="form.descripcion.errors.required">
+                <label class="font-weight-bold"><i class="fa fa-exclamation-circle"></i> El campo
+                    de descripción es obligatorio</label>
+            </div>
+        </div>
+    </div>
+    <div formGroupName="caracteristicas">
+        <div class="form-group" formArrayName="marca">
+            <label for="tipo"><i class="fas fa-tag"></i>Marca</label>
+            <div *ngFor="let marca of marca.controls; let i=index">
+                <input type="text" class="form-control" placeholder="Marca" name="marca" [formControlName]="i"
+                    [ngClass]="{ 'is-invalid': enviado && marca.errors }" required>
+                <div *ngIf="enviado && marca.errors?.required" class="invalid-feedback">
+                    <div>
+                        <label class="font-weight-bold"><i class="fa fa-exclamation-circle"></i> El campo
+                            de marca es obligatorio</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="tipo"><i class="fas fa-swatchbook"></i>Tipos de Altavoz<span class="text-muted"> e.g. Outdoor,
+                    Wireless</span></label>
+            <div class="text-danger" *ngIf="enviado && tipos.controls.length === 0">
+                <label class="font-weight-bold">
+                    <i class="fa fa-exclamation-circle"></i> El producto requiere por lo menos
+                    un tipo de altavoz</label>
+            </div>
+            <table class="table" formArrayName="tipo">
+                <tr>
+                    <th width="150px"><button type="button" class="btn btn-outline-primary" (click)="agregar_tipo()"
+                            [disabled]="!tipos.valid"><i class="fas fa-plus"></i>Agregar</button>
+                    </th>
+                </tr>
+                <tr *ngFor="let tipo of tipos.controls; let i=index">
+                    <td>
+                        <input type="text" class="form-control bg-white" placeholder="Tipo" [formControlName]="i"
+                            [ngClass]="{ 'is-invalid': (tipo.touched || enviado) && tipo.errors }" required>
+                    </td>
+                    <td>
+                        <button class="btn btn-outline-danger" (click)="eliminar_tipo(i)"><i class="fas fa-trash">
+                            </i>Eliminar</button>
+                    </td>
+                    <td>
+                        <div class="invalid-feedback">
+                            <label class="font-weight-bold"
+                                *ngIf="(tipo.touched || enviado) && tipo.errors?.required">
+                                <i class="fa fa-exclamation-circle"></i> El campo
+                                de tipo es obligatorio</label>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="form-group" formArrayName="conexion">
+            <label for="tipo"><i class="fas fa-plug"></i>Conexión <span class="text-muted"> e.g. Bluetooth, 3.5mm
+                    Jack</span></label>
+            <div class="text-danger" *ngIf="enviado && conexiones.controls.length === 0">
+                <label class="font-weight-bold">
+                    <i class="fa fa-exclamation-circle"></i> El producto requiere por lo menos
+                    una conexión</label>
+            </div>
+            <table class="table">
+                <tr>
+                    <th width="150px"><button type="button" class="btn btn-outline-primary" (click)="agregar_conexion()"
+                            [disabled]="!conexiones.valid">
+                            <i class="fas fa-plus"></i>Agregar</button>
+                    </th>
+                </tr>
+                <tr *ngFor="let conexion of conexiones.controls; let i=index">
+                    <td>
+                        <input type="text" class="form-control bg-white" placeholder="Conexión" [formControlName]="i"
+                            [ngClass]="{ 'is-invalid': (conexion.touched || enviado) && conexion.errors }" required>
+                    </td>
+                    <td>
+                        <button class="btn btn-outline-danger" (click)="eliminar_conexion(i)"><i
+                                class="fas fa-trash"></i>Eliminar</button>
+                    </td>
+                    <td>
+                        <div class="invalid-feedback">
+                            <label class="font-weight-bold"
+                                *ngIf="(conexion.touched || enviado) && conexion.errors?.required">
+                                <i class="fa fa-exclamation-circle"></i> El campo
+                                de conexión es obligatorio</label>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>

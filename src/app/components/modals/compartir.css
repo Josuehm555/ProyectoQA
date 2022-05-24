@@ -1,0 +1,49 @@
+.modal_confirmar {
+    color: #636363;
+}
+
+.modal_confirmar .modal-content {
+    padding: 20px;
+    border-radius: 5px;
+    border: none;
+    text-align: center;
+    font-size: 14px;
+}
+
+.modal_confirmar .modal-header {
+    border-bottom: none;
+}
+
+.modal_confirmar h4 {
+    text-align: center;
+    font-size: 26px;
+    margin: 30px 0 -10px;
+}
+
+.modal_confirmar .modal-body {
+    color: #999;
+}
+
+.modal_confirmar .modal-footer {
+    border: none;
+    text-align: center;
+    border-radius: 5px;
+    font-size: 13px;
+    padding: 10px 15px 25px;
+}
+
+.modal_confirmar .modal-footer a {
+    color: #999;
+}
+
+.modal_confirmar .btn,
+.modal_confirmar .btn:active {
+    border: none;
+}
+
+.modal_fondo {
+    background: rgba(0, 0, 0, 0.5);
+}
+
+
+/*Reference: https://www.tutorialrepublic.com/snippets/preview.php?topic=bootstrap&file=delete-confirmation-modal*/

@@ -1,0 +1,11 @@
+hr {
+    border: none;
+    height: 0.5px;
+}
+
+img {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    max-height: 150px;
+    max-width: 150px;
+}

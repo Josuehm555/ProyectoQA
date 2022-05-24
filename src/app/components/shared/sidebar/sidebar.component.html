@@ -1,0 +1,54 @@
+<body class="bg-light">
+    <div class="container-fluid d-sm-block d-lg-none">
+        <div class="row">
+            <button class="navbar-toggler bg-white" type="button" (click)="menu_responsive = !menu_responsive">
+                &#9776;
+            </button>
+            <aside [ngbCollapse]="menu_responsive"
+                class="collapse navbar-collapse col-sm-3 flex-grow-sm-1 flex-shrink-1 flex-grow-0 pb-sm-0 pb-3 float-end">
+                <div class="bg-white rounded-3 p-1 h-100">
+                    <a class="d-flex align-items-center pt-3 text-decoration-none">
+                        <img src="../../../../music.png" class="imagen_sidebar" alt="Logo Minimizado Audiophistic">
+                        <span class="ms-3 fs-4">Menú</span>
+                    </a>
+                    <hr>
+                    <ul class="nav nav-pills mb-auto justify-content-between text-truncate flex-container"
+                        orientation="vertical">
+                        <li *ngFor="let opcion of menu" class="nav-item">
+                            <a class="nav-link px-2 text-truncate" [routerLink]="opcion.ruta"
+                                [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:
+                                true}" (click)="menu_responsive = true">
+                                <i class="{{opcion.icono}}"></i>
+                                <span class="ms-3">{{opcion.titulo}}</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </aside>
+        </div>
+    </div>
+
+    <div class="container-fluid">
+        <aside class="d-none d-lg-block">
+            <div class="bg-white border rounded-3 p-1 h-100 menu">
+                <a class="d-flex align-items-center pt-3 link-dark text-decoration-none">
+                    <img src="../../../../music.png" class="imagen_sidebar" alt="Logo Minimizado Audiophistic">
+                    <span class="ms-3 fs-4">Menú</span>
+                </a>
+                <hr>
+                <ul class="nav nav-pills flex-sm-column flex-row mb-auto justify-content-between text-truncate"
+                    orientation="vertical">
+                    <li *ngFor="let opcion of menu" class="nav-item">
+                        <a class="nav-link px-2 text-truncate" [routerLink]="opcion.ruta"
+                            [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:
+                                true}">
+                            <i class="{{opcion.icono}}"></i>
+                            <span class="ms-3">{{opcion.titulo}}</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </aside>
+
+    </div>
+</body>

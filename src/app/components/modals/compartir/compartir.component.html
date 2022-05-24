@@ -1,0 +1,27 @@
+<div class="modal_confirmar">
+    <div class="modal-content">
+        <div class="container d-flex justify-content-end">
+            <button type="button" [disabled]="cargando" class="btn" data-dismiss="modal"
+                (click)="cerrar_modal()">&times;</button>
+        </div>
+        <div class="modal-header">
+            <h4 class="modal-title w-100 m-0">
+                <div class="icon-box justify-content-center align-items-center d-lg-flex d-none d-lg-block pb-4">
+                    <i class="fas fa-share-alt"></i>
+                </div>
+                Compartir
+            </h4>
+        </div>
+        <hr>
+        <div class="modal-body">
+            <div class="input-group p-5">
+                <input type="text" class="form-control" [value]="datos_compartir.enlace" id="enlace">
+                <div class="input-group-append">
+                    <button type="button" placement="top" ngbTooltip="Copiar al portapapeles"
+                        class="input-group-text copiar" (click)="copiar_enlace()"> <i
+                            class="far fa-clone me-2"></i>Copiar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
