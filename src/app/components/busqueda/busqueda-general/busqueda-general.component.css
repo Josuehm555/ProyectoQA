@@ -1,0 +1,129 @@
+#burbujas {
+    height: 100%
+}
+
+#burbujas {
+    padding: 100px 0
+}
+
+.burbuja {
+    width: 60px;
+    height: 60px;
+    background: var(--rojizo);
+    border-radius: 200px;
+    position: absolute;
+}
+
+.x1 {
+    -webkit-transform: scale(0.9);
+    -moz-transform: scale(0.9);
+    transform: scale(0.9);
+    opacity: 0.2;
+    animation: mover_burbujas 15s linear infinite, mover_a_lados 4s ease-in-out infinite alternate;
+}
+
+.x2 {
+    left: 10%;
+    -webkit-transform: scale(0.6);
+    -moz-transform: scale(0.6);
+    transform: scale(0.6);
+    opacity: 0.5;
+    animation: mover_burbujas 25s linear infinite, mover_a_lados 5s ease-in-out infinite alternate;
+}
+
+.x3 {
+    left: 30%;
+    -webkit-transform: scale(0.8);
+    -moz-transform: scale(0.8);
+    transform: scale(0.8);
+    opacity: 0.3;
+    animation: mover_burbujas 20s linear infinite, mover_a_lados 4s ease-in-out infinite alternate;
+}
+
+.x4 {
+    left: 40%;
+    -webkit-transform: scale(0.75);
+    -moz-transform: scale(0.75);
+    transform: scale(0.75);
+    opacity: 0.35;
+    animation: mover_burbujas 18s linear infinite, mover_a_lados 2s ease-in-out infinite alternate;
+}
+
+.x5 {
+    left: 15%;
+    -webkit-transform: scale(0.8);
+    -moz-transform: scale(0.8);
+    transform: scale(0.8);
+    opacity: 0.3;
+    animation: mover_burbujas 7s linear infinite, mover_a_lados 1s ease-in-out infinite alternate;
+}
+
+@keyframes mover_burbujas {
+    0% {
+        top: 500px;
+    }
+    100% {
+        top: -500px;
+    }
+}
+
+@keyframes mover_a_lados {
+    0% {
+        margin-left: 0px;
+    }
+    100% {
+        margin-left: 50px;
+    }
+}
+
+/*--------------------BUTTONS-------------------------*/
+
+.form_btn {
+    width: 25%;
+}
+
+/*--------------FORM---------------------*/
+
+._form {
+    width: 50%;
+}
+
+.grid_contenedor{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 30px;
+}
+.form-check{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.form-check-label{
+    padding-left: 5%;
+}
+
+/*------------------------------------------------------------------
+  [ Responsive ]*/
+
+@media (max-width: 1000px) {
+    ._form {
+        width: 100%;
+    }
+    .grid_contenedor{
+        display: grid;
+        grid-template-columns: 1fr;
+    }
+    .form-check{
+        display: flex;
+        align-items: left;
+        justify-content: left;
+        padding-left: 10%;
+    }
+    .form_btn{
+        width: 50%;
+    }
+}
+
+/*
+   Referencia: http://jsfiddle.net/p5gpx/
+*/

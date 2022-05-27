@@ -1,0 +1,38 @@
+<div class="container-fluid card">
+    <div class="card-title mt-4">
+        <h4>Categorías</h4>
+        <hr>
+    </div>
+    <div class="card-body">
+        <a type="button" class="btn btn-outline-primary" [routerLink]="['/inicio/crear-categoria']"><i
+                class="fas fa-plus me-2"></i>Agregar Nueva Categoría</a>
+        <div class="table-responsive mt-4">
+            <table datatable [dtOptions]="dtOptions" [dtTrigger]="trigger_tabla"
+                class="row-border hover table table-hover w-100">
+                <thead>
+                    <tr>
+                        <th>Categoría</th>
+                        <th>Fecha de creación</th>
+                        <th>Cant. de blogs</th>
+                        <th>Acción</th>
+                    </tr>
+                </thead>
+                <tbody *ngIf="categorias?.length != 0">
+                    <tr *ngFor="let categoria of categorias">
+                        <td>{{ categoria.nombre }}</td>
+                        <td>{{formatear_fecha(categoria.fecha_creacion)}}</td>
+                        <td>{{ categoria.cantidad_blogs}}</td>
+                        <td>
+                            <a class="btn btn-outline-danger m-1" (click)="abrir_modal_eliminar(categoria.id_categoria, categoria.nombre)"><i class="fas fa-trash"></i></a>
+                        </td>
+                    </tr>
+                </tbody>
+                <tbody *ngIf="categorias?.length == 0">
+                    <tr>
+                        <td colspan="3" class="no-data-available">¡No hay datos!</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

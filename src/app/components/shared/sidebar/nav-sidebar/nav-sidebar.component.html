@@ -1,0 +1,62 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-white">
+    <div class="container-fluid">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <div class="col-12 col-lg-6 d-block d-lg-none">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0 d-block d-lg-none">
+                    <li class="nav-item">
+                        <a class="nav-link navbar-brand" href="#"><img src="../../../../assets/img/logo.png" width="120" alt="Logo Audiophistic"></a>
+                    </li>
+                    <li class="nav-item">
+                        <a type="button" class="btn me-2" href="/home" aria-label="Página Principal Responsive">
+                            <i class="fas fa-home d-inline-flex"></i>
+                            <span class="d-block d-lg-none d-inline-flex"> Página Principal </span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a type="button" class="btn me-2" href="/buscar">
+                            <i class="fas fa-search d-inline-flex"></i>
+                            <span class="d-block d-lg-none d-inline-flex"> Buscar </span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a type="button" class="btn me-2">
+                            <i class="fas fa-shopping-bag d-inline-flex"></i>
+                            <span class="d-block d-lg-none d-inline-flex"> Tienda </span>
+                        </a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <div ngbDropdown class="d-inline-block">
+                            <a type="button" id="perfil_opciones" class="btn me-2" ngbDropdownToggle>
+                                <i class="fas fa-user d-inline-flex"></i>
+                                <span class="d-block d-lg-none d-inline-flex"> Perfil </span>
+                            </a>
+                            <div ngbDropdownMenu aria-labelledby="perfil_opciones">
+                                <button (click)="cerrar_sesion()" ngbDropdownItem>Cerrar Sesión</button>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="d-none d-lg-block ps-5 me-auto">
+                <a href="#"><img src="../../../../assets/img/logo.png" width="120" alt="Logo Audiophistic"></a>
+            </div>
+            <div class="d-none d-lg-block text-end d-inline-block">
+                <button type="button" class="btn me-2" onclick="location.href='/home'" aria-label="Página Principal"><i class="fas fa-home"></i></button>
+                <button type="button" class="btn me-2" onclick="location.href='/buscar'" aria-label="buscar_boton"><i class="fas fa-search"></i></button>
+                <button type="button" class="btn me-2" onclick="location.href='/audifonos'" aria-label="tienda_audifonos"><i class="fas fa-shopping-bag"></i></button>
+                <div ngbDropdown class="d-inline-block" display="dynamic" placement="bottom-right">
+                    <button type="button" id="perfil_opciones" class="btn me-2" ngbDropdownToggle aria-label="perfil_boton">
+                        <i class="fas fa-user"></i>
+                        {{nombre}}
+                    </button>
+                    <div ngbDropdownMenu aria-labelledby="perfil_opciones">
+                        <button (click)="cerrar_sesion()" ngbDropdownItem>Cerrar Sesión</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>

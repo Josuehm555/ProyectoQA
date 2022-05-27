@@ -1,0 +1,174 @@
+<body id="home">
+    <section class="banner">
+        <div class="container">
+
+            <!-- Primera Mitad -->
+            <div class="text-white d-md-flex align-items-center p-0 m-0 text-left justify-content-center">
+                <div class="p-5">
+                    <img class="logo mb-3 text_appear" src="../../../assets/img/logo.png" alt="Logo Audiophistic">
+                    <p class="mb-5 text_appear">Audiophistic es una tienda de audio, cuyo catálogo de productos está conformado por audífonos, parlantes, y álbumes musicales. Los productos pueden tener un blog relacionado para informar sobre el trasfondo y/o las características
+                        del producto. Audiophistic es para personas que deseen comprar música, sino dispositivos de audio para poder escuchar los álbumes adquiridos.
+                    </p>
+
+                    <button class="btn form_btn text_appear" onclick="location.href='/buscar'">
+                        Comprar Ahora
+                    </button>
+                </div>
+            </div>
+        </div>
+        <img src="../../../assets/img/wave1.png" class="bottom_image" alt="Imagen Forma de Ola">
+    </section>
+
+    <!-- Sección Más Vendidos -->
+    <section>
+        <div class="container">
+            <div class="main_title text-center justify-content-center  align-items-center ps-3">
+                <h2 class="font-weight-bold">Más Vendidos</h2>
+                <p class="text-muted pt-3"> En esta sección te mostramos los diez productos más vendidos en el último mes.</p>
+            </div>
+            <div id="carouselProducts" class="carousel  carousel-dark slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    <div *ngFor="let num of slides" [ngClass]="{'active': num == 0}" class="carousel-item" data-bs-interval="10000">
+                        <div class="container_carousel">
+                            <div class="d-none d-lg-block">
+                                <div class="row text-center">
+                                    <div class="col-lg-4">
+                                        <app-product-cards></app-product-cards>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <app-product-cards></app-product-cards>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <app-product-cards></app-product-cards>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="d-sm-block d-lg-none">
+                                <div class="row text-center">
+                                    <div class="col-12">
+                                        <app-product-cards></app-product-cards>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselProducts" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselProducts" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+        </div>
+    </section>
+    <!-- FIN: Sección Más Vendidos -->
+
+    <!-- Sección Mejores Vendedores -->
+    <section>
+        <div class="container">
+            <div class="main_title text-center ps-3">
+                <h2 class="font-weight-bold">Mejores Vendedores</h2>
+                <p class="text-muted pt-3">En esta sección te mostramos los diez creadores de contenido con más ventas y mejores calificaciones.</p>
+            </div>
+            <div class="slider mb-5">
+                <div class="slide-track">
+                    <div class="slide">
+                        <img src="https://cms.blumewebsites.com/vertigo/website/logo.png" height="100" width="auto" alt="Logo Vendedor 1" />
+                    </div>
+                    <div class="slide">
+                        <img src="https://logos-marcas.com/wp-content/uploads/2020/04/Sony-Logotipo-1957%E2%80%931961.jpg" height="100" width="auto" alt="Logo Vendedor 2" />
+                    </div>
+                    <div class="slide">
+                        <img src="https://1000marcas.net/wp-content/uploads/2019/12/logo-Samsung.png" height="100" width="auto" alt="Logo Vendedor 3" />
+                    </div>
+                    <div class="slide">
+                        <img src="https://marcas-logos.net/wp-content/uploads/2020/03/JBL-Logo-tumb.jpg" height="70" width="auto" alt="Logo Vendedor 4" />
+                    </div>
+                    <div class="slide">
+                        <img src="http://www.ntsdevices.com/wp-content/uploads/2017/09/Apple-Logo.png" height="70" width="auto" alt="Logo Vendedor 5" />
+                    </div>
+                    <div class="slide">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSHzwU86EwG5uzzhIxHRenpoyJzwG_yn7L2wp6sd4idMn7IDtp3nl5RCvYN61EZtHmvFa4&usqp=CAU" height="100" width="auto" alt="Logo Vendedor 6" />
+                    </div>
+                    <div class="slide">
+                        <img src="https://1000marcas.net/wp-content/uploads/2021/05/Beats-by-Dre-logo.png" height="100" width="auto" alt="Logo Vendedor 7" />
+                    </div>
+                    <div class="slide">
+                        <img src="https://cms.blumewebsites.com/vertigo/website/logo.png" height="100" width="auto" alt="Logo Vendedor 8" />
+                    </div>
+                    <div class="slide">
+                        <img src="https://logos-marcas.com/wp-content/uploads/2020/04/Sony-Logotipo-1957%E2%80%931961.jpg" height="100" width="auto" alt="Logo Vendedor 9" />
+                    </div>
+                    <div class="slide">
+                        <img src="https://1000marcas.net/wp-content/uploads/2019/12/logo-Samsung.png" height="100" width="auto" alt="Logo Vendedor 10" />
+                    </div>
+                    <div class="slide">
+                        <img src="https://marcas-logos.net/wp-content/uploads/2020/03/JBL-Logo-tumb.jpg" height="70" width="auto" alt="Logo Vendedor 11" />
+                    </div>
+                    <div class="slide">
+                        <img src="http://www.ntsdevices.com/wp-content/uploads/2017/09/Apple-Logo.png" height="70" width="auto" alt="Logo Vendedor 12" />
+                    </div>
+                    <div class="slide">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSHzwU86EwG5uzzhIxHRenpoyJzwG_yn7L2wp6sd4idMn7IDtp3nl5RCvYN61EZtHmvFa4&usqp=CAU" height="100" width="auto" alt="Logo Vendedor 13" />
+                    </div>
+                    <div class="slide">
+                        <img src="https://1000marcas.net/wp-content/uploads/2021/05/Beats-by-Dre-logo.png" height="100" width="auto" alt="Logo Vendedor 14" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- FIN: Sección Mejores Vendedores -->
+
+
+    <!-- Sección Caracteristicas Audiophistic -->
+    <section class="info_banner">
+        <div class="container pb-5">
+            <div class="main_title text-center ps-3">
+                <h2 class="font-weight-bold">¿Qué ofrece Audiophistic?</h2>
+                <hr>
+                <p class="text-muted pt-3">Audiophistic es una tienda de audio, cuyo catálogo de productos está conformado por audífonos, parlantes, y álbumes musicales. Los productos pueden tener un blog relacionado para informar sobre el trasfondo y/o las características del
+                    producto.
+                </p>
+            </div>
+            <div class="container">
+                <div class="row features-row wow fade_in_up">
+                    <div class="col-md-4 col-sm-12 feature-column">
+                        <div class="feature-icon">
+                            <i class="fab fa-blogger-b fa-2x"></i>
+                        </div>
+                        <div class="feature-info">
+                            <h4>Blogs</h4>
+                            <p class="feature-description">
+                                Ofrecemos blogs asociados a productos para que te informes sobre dicho producto y estés seguro de tu compra o simplemente para informarte de lo último en música.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-12 white feature-column">
+                        <div class="feature-icon">
+                            <i class="fas fa-comments fa-2x"></i>
+                        </div>
+                        <div class="feature-info">
+                            <h4>Comunidad</h4>
+                            <p class="feature-description">Audiophistic crea una comunidad para personas con intereses comunes como lo es la música. Puedes comentar y calificar productos y blogs para dar retroalimentación a los creadores de contenido.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-12 white feature-column">
+                        <div class="feature-icon">
+                            <i class="fas fa-shopping-cart fa-2x"></i>
+                        </div>
+                        <div class="feature-info">
+                            <h4>Vendedores independientes</h4>
+                            <p class="feature-description">Si tienes audífonos, álbumes o parlantes que quieres vender (y, además, te gusta escribir blogs), puedes formar parte del equipo de Audiophistic y nosotros te ayudamos a vender tus productos.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- FIN: Sección Caracteristicas Audiophistic -->
+    <app-footer></app-footer>
+</body>

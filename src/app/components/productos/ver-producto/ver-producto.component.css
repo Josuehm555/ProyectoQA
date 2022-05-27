@@ -1,0 +1,137 @@
+:root {
+    --scalar: 1.2;
+}
+
+.card {
+    border: none;
+    margin-top: 50px;
+    padding: 3em;
+    line-height: 1.5em;
+}
+
+.colores label {
+    min-height: 25px;
+    min-width: 25px;
+    border-radius: 90%;
+}
+
+.colores input[type="radio"], .presentaciones input[type="radio"] {
+    opacity: 0.011;
+    z-index: 100;
+}
+
+.colores input[type="radio"]:checked+label {
+    border-color: var(--texto_claro);
+    --scalar: 1.2;
+    animation: crescendo 0.5s;
+    transform: scale(var(--scalar));
+}
+
+.presentaciones input[type="radio"]:checked+label {
+    border-color: var(--texto_claro);
+    --scalar: 1.1;
+    animation: crescendo 0.5s;
+    transform: scale(var(--scalar));
+}
+
+.colores label {
+    padding: 5px;
+    border: 1px solid #CCC;
+    cursor: pointer;
+    z-index: 90;
+}
+
+.titulo, .precio, .presentaciones {
+    text-transform: UPPERCASE;
+    font-weight: bold;
+}
+
+.titulo, .calificacion, .colores, .presentaciones {
+    margin-bottom: 15px;
+}
+
+.titulo {
+    margin-top: 0;
+}
+
+.color {
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 10px;
+    height: 2em;
+    width: 2em;
+    border-radius: 2px;
+}
+
+.color:first-of-type {
+    margin-left: 20px;
+}
+
+.carrito {
+    margin-right: 5px;
+}
+
+.carrito, .compartir {
+    padding: 1.2em 1.5em;
+    text-transform: UPPERCASE;
+    font-weight: bold;
+}
+
+.grid_contenedor .texto {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 2vh;
+    overflow: auto;
+}
+
+.carousel-control-prev {
+    margin-left: -60px;
+}
+
+.carousel-control-next {
+    margin-right: -60px;
+}
+
+#carrusel {
+    max-width: 40%;
+}
+
+@keyframes crescendo {
+    0% {
+        transform: scale(1);
+    }
+    100% {
+        transform: scale(var(--scalar));
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .grid_contenedor .texto {
+        display: grid;
+        grid-template-columns: 1fr;
+    }
+    .presentaciones label {
+        display: grid;
+        grid-template-columns: 1fr;
+    }
+}
+
+@media screen and (max-width: 770px) {
+    .titulo {
+        margin-top: 20%;
+    }
+    .carousel-inner>.carousel-item>img {
+        height: 40vh;
+    }
+}
+
+@media screen and (min-width: 997px) {
+    .wrapper {
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+    }
+}
+
+/*Reference: https://bootsnipp.com/snippets/56bAW*/

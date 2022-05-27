@@ -1,0 +1,121 @@
+<div class="container">
+    <div class="card">
+        <div class="container-fliud">
+            <div class="wrapper row">
+                <div class="col-md-6 container-fluid d-flex justify-content-center align-items-center text-center">
+                    <div id="carrusel" class="carousel slide carousel-dark slide" data-bs-ride="carousel" data-bs-interval="3000">
+                        <div class="carousel-inner flex-grow-1">
+                            <div class="carousel-item" *ngFor="let imagen of imagenes; let i = index" [ngClass]="{'active': i == 0}">
+                                <img class="d-block w-100" [src]="imagen" alt="Imagen Producto">
+                            </div>
+                        </div>
+                        <button class="carousel-control-prev" data-bs-target="#carrusel" type="button" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" data-bs-target="#carrusel" type="button" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
+                    </div>
+
+                </div>
+                <div class="col-md-6">
+                    <h3 class="titulo">{{producto.titulo}}</h3>
+                    <div class="calificacion d-flex justify-content-start">
+                        <app-estrellas [calificacion]="producto.calificacion"></app-estrellas>
+                        <span class="ps-2 review-no text-muted">({{producto.cantidad_resenas}})</span>
+                    </div>
+                    <h4 class="precio"><strong>{{precio | currency:'CRC':'symbol-narrow'}}</strong></h4>
+
+                    <form class="form-horizontal">
+
+                        <fieldset class="control-group" *ngIf="nombre_estilo == 'colores'">
+                            <legend class="control-label pb-2 fs-6">Colores:</legend>
+                            <div class="controls colores">
+                                <div *ngFor="let item of estilos" class="d-inline-block">
+                                    <input type="radio" checked="" [value]="item.id_estilo" [id]="item.nombre" name="colores_grupo" (change)="cambiar_atributos(item)" [(ngModel)]="id_estilo_seleccionado">
+                                    <label [attr.for]="item.nombre" [ngStyle]="{'background-color': item.descripcion}">
+                                    </label>
+
+                                </div>
+                            </div>
+                        </fieldset>
+
+                        <div class="control-group" *ngIf="nombre_estilo == 'presentaciones'">
+                            <label class="control-label pb-2">Presentaciones:</label>
+                            <div class="controls radio-group presentaciones">
+                                <div *ngFor="let item of estilos" class="d-inline-block">
+                                    <input type="radio" checked="" [value]="item.id_estilo" [id]="item.id_estilo" name="presentaciones_grupo" (change)="cambiar_atributos(item)" [(ngModel)]="id_estilo_seleccionado">
+                                    <label [attr.for]="item.id_estilo" class="btn btn-light"> {{item.nombre}} </label>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
+                    <div class="container mt-4" *ngIf="existencia_estilo_seleccionado != -1 && existencia_estilo_seleccionado != 0">
+                        <div class="form-check-inline">
+                            <button class="btn" (click)="quitar()" aria-label="quitar_boton"><i class="fa fa-minus"></i></button>
+                        </div>
+                        <div class="form-check-inline w-25">
+                            <input type="text" class="form-control" [(ngModel)]="cantidad" disabled aria-label="cantidad_label">
+                        </div>
+                        <div class="form-check-inline">
+                            <button class="btn" (click)="agregar()" aria-label="agregar_boton"><i class="fa fa-plus"></i></button>
+                        </div>
+                    </div>
+                    <div class="container mt-4" *ngIf="existencia_estilo_seleccionado == 0">
+                        <div class="text-danger">
+                            El producto está agotado
+                        </div>
+                    </div>
+
+
+                    <div class="accion d-flex justify-content-start mt-3">
+                        <button class="form_btn btn btn-default carrito" type="button" (click)="agregar_producto()">
+                            <span class="fas fa-shopping-cart d-sm-block d-md-none"></span>
+                            <span class="d-none d-md-block">Añadir al carrito </span></button>
+                        <button class="form_btn btn btn-default compartir" (click)="abrir_modal_compartir()" type="button"><span class="fas fa-share-alt"></span><span class="d-none">Compartir</span></button>
+                    </div>
+                    <div class="autor mt-2" style="cursor: pointer;">
+                        <button (click)="ver_creador(producto.id_creador)" class="btn">Por: <span
+                                class="text-danger">{{producto.nombre_creador}}</span></button>
+                    </div>
+                </div>
+            </div>
+            <div class="autor mt-2" style="cursor: pointer;" *ngIf="producto.id_blog">
+                <button (click)="ver_blog(producto.id_blog)" class="btn">Blog: <span
+                        class="text-danger">{{producto.nombre_blog}}</span></button>
+            </div>
+            <div class="wrapper row mt-3">
+                <ul class="nav nav-tabs" id="" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="descripcion-tab" data-bs-toggle="tab" data-bs-target="#descripcion" type="button" role="tab" aria-controls="descripcion" aria-selected="true">Descripción</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="especificaciones-tab" data-bs-toggle="tab" data-bs-target="#especificaciones" type="button" role="tab" aria-controls="especificaciones" aria-selected="false">Especificaciones</button>
+                    </li>
+                </ul>
+                <div class="tab-content" id="">
+                    <div class="tab-pane fade show active p-3" id="descripcion" role="tabpanel" aria-labelledby="descripcion-tab">
+                        {{producto.descripcion}}
+                    </div>
+                    <div class="tab-pane fade p-3" id="especificaciones" role="tabpanel" aria-labelledby="especificaciones-tab">
+                        <div class="grid_contenedor">
+                            <div *ngFor="let esp of especificaciones">
+                                <div class="texto">
+                                    <div class="fw-bold">{{esp.especificacion}}</div>
+                                    <div>{{esp.valor}}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div>
+        <app-calificacion-productos [producto]="producto" [mi_resena]="mi_resena"></app-calificacion-productos>
+        <app-comentarios-productos [id_producto]="producto.id_producto"></app-comentarios-productos>
+    </div>
+</div>

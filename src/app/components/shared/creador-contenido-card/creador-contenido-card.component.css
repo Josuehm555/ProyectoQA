@@ -1,0 +1,13 @@
+.card {
+    transition: all .2s ease-in-out;
+}
+
+.card-title {
+    margin-bottom: 0.3rem;
+    font-size: 1.2em;
+}
+
+.card:hover, .card:focus {
+    transform: scale(1.1);
+    cursor: pointer;
+}

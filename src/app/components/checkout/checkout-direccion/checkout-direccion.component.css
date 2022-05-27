@@ -1,0 +1,13 @@
+.grid_contenedor {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 2vh;
+    overflow: auto;
+}
+
+@media screen and (max-width: 500px) {
+    .grid_contenedor {
+        display: grid;
+        grid-template-columns: 1fr;
+    }
+}

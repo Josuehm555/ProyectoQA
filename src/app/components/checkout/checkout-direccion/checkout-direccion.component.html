@@ -1,0 +1,143 @@
+<div [formGroup]="checkout_form">
+    <h5 class="mb-4">Información de contacto</h5>
+    <div class="row g-3">
+        <div class="grid_contenedor p-5 pt-2">
+            <div class="fw-bold">Nombre: </div>
+            <div>{{usuario.nombre}}</div>
+            <div class="fw-bold">Correo Electrónico: </div>
+            <div>{{usuario.correo}}</div>
+        </div>
+    </div>
+    <h5 class="mt-4 mb-4">Dirección de envío</h5>
+    <div class="row g-3" formGroupName="direccion_pedido">
+        <div class="col-12">
+            <div class="wrap_input_form">
+                <input class="input_form  bg-light" type="text" name="nombre" placeholder="Nombre"
+                    formControlName="nombre_consumidor"
+                    [ngClass]="{ 'is-invalid': enviado && form_direccion.nombre_consumidor.errors }">
+                <span class="focus_input_form"></span>
+                <span class="icono_input_form">
+                    <i class="fas fa-user"></i>
+                </span>
+            </div>
+            <div class="ms-3">
+                <div *ngIf="enviado && form_direccion.nombre_consumidor.errors" class="text-danger mb-3">
+                    <div *ngIf="form_direccion.nombre_consumidor.errors.required">
+                        <label class="font-weight-bold"><i class="fa fa-exclamation-circle"></i> El
+                            campo de nombre es obligatorio</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12">
+            <div class="wrap_input_form">
+                <input class="input_form  bg-light" type="text" name="cedula" placeholder="Número de cédula o ID"
+                    formControlName="cedula" [ngClass]="{ 'is-invalid': enviado && form_direccion.cedula.errors }">
+                <span class="focus_input_form"></span>
+                <span class="icono_input_form">
+                    <i class="fas fa-id-card"></i>
+                </span>
+            </div>
+            <div class="ms-3">
+                <div *ngIf="enviado && form_direccion.cedula.errors" class="text-danger mb-3">
+                    <div *ngIf="form_direccion.cedula.errors.required">
+                        <label class="font-weight-bold"><i class="fa fa-exclamation-circle"></i> El
+                            campo de cédula es obligatorio</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12">
+            <div class="wrap_input_form">
+                <input class="input_form  bg-light" type="text" name="celular" placeholder="Teléfono"
+                    formControlName="telefono" [ngClass]="{ 'is-invalid': enviado && form_direccion.telefono.errors }">
+                <span class="focus_input_form"></span>
+                <span class="icono_input_form">
+                    <i class="fas fa-phone"></i>
+                </span>
+            </div>
+            <div class="ms-3">
+                <div *ngIf="enviado && form_direccion.telefono.errors" class="text-danger mb-3">
+                    <div *ngIf="form_direccion.telefono.errors.required">
+                        <label class="font-weight-bold"><i class="fa fa-exclamation-circle"></i> El
+                            campo de teléfono es obligatorio</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12">
+            <div class="wrap_input_form">
+                <input class="input_form  bg-light" type="text" name="direccion" placeholder="Dirección Exacta"
+                    formControlName="direccion"
+                    [ngClass]="{ 'is-invalid': enviado && form_direccion.direccion.errors }">
+                <span class="focus_input_form"></span>
+                <span class="icono_input_form">
+                    <i class="fas fa-map-pin"></i>
+                </span>
+            </div>
+            <div class="ms-3">
+                <div *ngIf="enviado && form_direccion.direccion.errors" class="text-danger mb-3">
+                    <div *ngIf="form_direccion.direccion.errors.required">
+                        <label class="font-weight-bold"><i class="fa fa-exclamation-circle"></i> El
+                            campo de dirección es obligatorio</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-md-6">
+            <label for="provincia" class="text-muted mb-2"><i class="fas fa-map-marker me-3"></i>Provincia</label>
+            <select class="form-select form-control rounded-pill bg-light" id="provincia"
+                (change)="obtener_cantones($any($event.target).value, '')" name="provincia" [(ngModel)]="provincia"
+                [ngModelOptions]="{standalone: true}">
+                <option *ngFor="let prov of provincias; let i = index" [value]="prov.id">
+                    {{prov.nombre}}</option>
+            </select>
+        </div>
+
+        <div class="col-12 col-md-6">
+            <label for="canton" class="text-muted mb-2"><i class="fas fa-map-marker-alt me-3"></i>Cantón</label>
+            <select class="form-select form-control rounded-pill bg-light" id="canton" name="canton"
+                [(ngModel)]="canton" [ngModelOptions]="{standalone: true}">
+                <option *ngFor="let cant of cantones; let i = index" [value]="cant.id">
+                    {{cant.nombre}}</option>
+            </select>
+        </div>
+
+
+    </div>
+
+    <hr class="my-4">
+
+    <div class="form-check">
+        <input type="checkbox" class="form-check-input" id="same-address" [(ngModel)]="misma_direccion"
+            [ngModelOptions]="{standalone: true}">
+        <label class="form-check-label" for="same-address">Usar información de envío
+            como información de facturación
+        </label>
+    </div>
+</div>
+
+
+
+<hr class="my-4">
+<div class="row mb-5">
+    <div class="col-12 col-md-6">
+        <div class="pt-3">
+            <button class="btn" onclick="location.href='/carrito'">
+                <i class="fas fa-arrow-left me-3"></i>
+                Volver al carrito
+            </button>
+        </div>
+    </div>
+    <div class="col-12 col-md-6">
+        <div class="pt-3">
+            <button class="btn form_btn" (click)="siguiente()">
+                Continuar
+            </button>
+        </div>
+    </div>
+</div>

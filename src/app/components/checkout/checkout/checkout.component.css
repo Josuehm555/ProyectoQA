@@ -1,0 +1,28 @@
+a{
+    cursor: pointer;
+}
+
+.breadcrumb-item{
+    color: #696969;
+}
+
+.breadcrumb >.active {
+    color: black;
+    font-weight: 800;
+ }
+
+ strong{
+    color:#666E75
+ }
+
+ .imagen{
+     max-width: 25%;
+ }
+
+ @media screen and (max-width: 800px) {
+    .imagen{
+        max-width: 100%;
+    }
+}
+
+/* Referencia: https://getbootstrap.com/docs/4.5/examples/checkout/ */

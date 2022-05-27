@@ -1,0 +1,147 @@
+<div class="container">
+    <hr>
+    <h5 class="p-3 titulo_formularios">Agregar Blog</h5>
+    <hr>
+    <div id="stepper1" class="bs-stepper">
+        <div class="bs-stepper-header">
+            <div class="step" data-target="#primer_paso">
+                <button class="step-trigger">
+                    <span class="bs-stepper-circle"><i class="fas fa-info"></i></span>
+                    <span class="bs-stepper-label">Información General</span>
+                </button>
+            </div>
+            <div class="line"></div>
+            <div class="step" data-target="#segundo_paso">
+                <button class="step-trigger">
+                    <span class="bs-stepper-circle"><i class="fas fa-paragraph"></i></span>
+                    <span class="bs-stepper-label">Contenido</span>
+                </button>
+            </div>
+            <div class="line"></div>
+            <div class="step" data-target="#tercer_paso">
+                <button class="step-trigger">
+                    <span class="bs-stepper-circle"><i class="fas fa-tags"></i></span>
+                    <span class="bs-stepper-label">Etiquetas</span>
+                </button>
+            </div>
+            <div class="line"></div>
+            <div class="step" data-target="#cuarto_paso">
+                <button class="step-trigger">
+                    <span class="bs-stepper-circle"><i class="fas fa-boxes"></i></span>
+                    <span class="bs-stepper-label">Asociar Productos</span>
+                </button>
+            </div>
+        </div>
+        <div class="bs-stepper-content">
+            <form [formGroup]="blog_form">
+                <div id="primer_paso" class="content">
+                    <hr>
+                    <div class="form-group">
+                        <label for="titulo"><i class="fas fa-heading"></i> Título</label>
+                        <input type="text" class="form-control" placeholder="Título" name="titulo" formControlName="titulo" required [ngClass]="{ 'is-invalid': enviado && form.titulo.errors }" maxlength="200">
+                        <div *ngIf="enviado && form.titulo.errors" class="invalid-feedback">
+                            <div *ngIf="form.titulo.errors.required">
+                                <label class="font-weight-bold"><i class="fa fa-exclamation-circle"></i> El campo
+                                    de título es obligatorio</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="id_categoria"><i class="fas fa-tag"></i> Categoría </label>
+                            <select class="form-select form-control" name="id_categoria" formControlName="id_categoria">
+                                <option *ngFor="let cat of categorias; let i = index" [value]="cat.id_categoria">
+                                    {{cat.nombre}}</option>
+                            </select>
+                            <div *ngIf="enviado && form.id_categoria.errors" class="invalid-feedback">
+                                <div *ngIf="form.id_categoria.errors.required">
+                                    <label class="font-weight-bold"><i class="fa fa-exclamation-circle"></i> El campo
+                                        de categoría es obligatorio</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="imagen"><i class="fas fa-camera"></i>Imagen General</label>
+                            <br>
+                            <img *ngIf="form.imagen.value.includes('data:image/')" [src]="obtener_imagen()" alt="Foto de Blog" class="w-25">
+                            <div class="mt-2">
+                                <label class="btn btn-primary" for="selector">
+                                    <input id="selector" type="file" class="d-none"
+                                        accept="image/png, image/jpeg, image/jpg" (change)="leer_imagen($event)"
+                                        formControlName="imagen">
+                                    <i class="fa fa-fw fa-camera me-2"></i>
+                                    <span>Cambiar Foto</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="botones_navegacion">
+                        <button role="button" (click)="anterior()" class="btn btn-secondary m-2">Anterior</button>
+                        <button role="button" (click)="siguiente()" class="btn btn-primary">Siguiente</button>
+                    </div>
+                </div>
+                <div id="segundo_paso" class="content">
+                    <hr>
+                    <div *ngIf="enviado && form.contenido.errors" class="invalid-feedback">
+                        <div *ngIf="form.contenido.errors.required">
+                            <label class="font-weight-bold"><i class="fa fa-exclamation-circle"></i> El campo
+                                de contenido es obligatorio</label>
+                        </div>
+                    </div>
+                    <div class="contenedor_editor">
+                        <angular-editor formControlName="contenido" [config]="editor_config"></angular-editor>
+                    </div>
+                    <div class="botones_navegacion">
+                        <button role="button" (click)="anterior()" class="btn btn-secondary m-2">Anterior</button>
+                        <button role="button" (click)="siguiente()" class="btn btn-primary">Siguiente</button>
+                    </div>
+                </div>
+                <div id="tercer_paso" class="content">
+                    <hr>
+                    <div class="form-group">
+                        <label for="etiqueta"><i class="fas fa-tags"></i>Etiquetas</label>
+                        <div class="text-danger" *ngIf="enviado && etiquetas.controls.length === 0">
+                            <label class="font-weight-bold">
+                                <i class="fa fa-exclamation-circle"></i> El blog requiere por lo menos
+                                una etiqueta</label>
+                        </div>
+                        <table class="table" formArrayName="etiquetas">
+                            <tr>
+                                <th width="150px"><button type="button" class="btn btn-outline-primary" (click)="agregar_etiqueta()" [disabled]="!etiquetas.valid"><i
+                                            class="fas fa-plus"></i>Agregar</button>
+                                </th>
+                            </tr>
+                            <tr *ngFor="let etiqueta of etiquetas.controls; let i=index">
+                                <td>
+                                    <input type="text" class="form-control bg-white" [ngClass]="{ 'is-invalid': (etiqueta.touched || enviado) && etiqueta.errors }" placeholder="Etiquetas" [formControlName]="i" required>
+                                </td>
+                                <td>
+                                    <button class="btn btn-outline-danger" (click)="eliminar_etiqueta(i)"><i
+                                            class="fas fa-trash"></i>Eliminar</button>
+
+                                </td>
+                                <td>
+                                    <div class="invalid-feedback">
+                                        <label class="font-weight-bold" *ngIf="(etiqueta.touched || enviado) && etiqueta.errors?.required">
+                                            <i class="fa fa-exclamation-circle"></i> El campo
+                                            de etiqueta es obligatorio</label>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="botones_navegacion">
+                        <button (click)="anterior()" class="btn btn-secondary m-2">Anterior</button>
+                        <button (click)="siguiente()" class="btn btn-primary">Siguiente</button>
+                    </div>
+                </div>
+                <div id="cuarto_paso" class="content">
+                    <app-asociar-productos [productos_asociados]="productos_asociados" [mis_productos]="mis_productos"></app-asociar-productos>
+                    <div class="botones_navegacion">
+                        <button (click)="anterior()" class="btn btn-secondary m-2">Anterior</button>
+                        <button type="submit" class="btn btn-primary" [disabled]="cargando" (click)="crear_blog()">
+                            <i *ngIf="cargando" class="fas fa-sync fa-spin"></i>Crear Blog</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

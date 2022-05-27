@@ -1,0 +1,34 @@
+.calificacion {
+    padding: 54px;
+    padding-bottom: 20px;
+}
+
+.producto_calificacion {
+    font-size: 50px
+}
+
+.texto_calificacion {
+    margin-top: 10px
+}
+
+
+.grid_contenedor {
+    display: grid;
+    grid-template-rows: 1fr;
+    grid-row-gap: 10px;
+}
+
+.grid_contenedor .criterio {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-column-gap: 20px;
+}
+
+@media screen and (max-width: 400px) {
+    .grid_contenedor .criterio {
+        display: grid;
+        grid-template-columns: 1fr;
+    }
+}
+
+/*Referencia: https://freefrontend.com/bootstrap-star-ratings/*/

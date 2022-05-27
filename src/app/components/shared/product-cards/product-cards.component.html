@@ -1,0 +1,17 @@
+<button class="btn card h-100 w-100 d-flex justify-content-center align-items-center border-0" (click)="ver_producto()">
+    <div class="card-header bg-white border-0 p-0">
+        <img class="card-img" [src]="producto.imagen" style="height: 150px; width: auto;" [alt]="producto.titulo">
+    </div>
+    <div class="card-body text-center">
+        <div class="mb-2">
+            <h6 class="font-weight-semibold mb-2"> <a class="text-dark mb-2" data-abc="true">
+                    {{producto.titulo}}
+                </a> </h6> <a class="text-muted" data-abc="true">{{producto.caracteristicas.nombre_tipo}}</a>
+        </div>
+        <h5 class="mb-0 font-weight-semibold">{{producto.precio | currency:'CRC':'symbol-narrow'}}</h5>
+        <div>
+            <app-estrellas [calificacion]="producto.calificacion"></app-estrellas>
+            <span class="text-muted">{{producto.cantidad_resenas}} reseñas</span>
+        </div>
+    </div>
+</button>

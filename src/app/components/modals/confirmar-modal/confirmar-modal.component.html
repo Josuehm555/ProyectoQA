@@ -1,0 +1,24 @@
+<div class="modal_confirmar">
+    <div class="modal-content">
+        <div class="container d-flex justify-content-end">
+            <button type="button" class="btn" data-dismiss="modal" (click)="cerrar_modal('cancelar')">&times;</button>
+        </div>
+        <div class="modal-header">
+            <h4 class="modal-title w-100 m-0">
+                Confirmar
+            </h4>
+        </div>
+        <hr>
+        <div class="modal-body">
+            <div class="p-3">
+                <div>
+                    <p>{{datos_confirmar.mensaje}}</p>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer justify-content-center">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="cerrar_modal('cancelar')">Cancelar</button>
+            <button type="button" class="btn btn-primary" (click)="cerrar_modal('confirmar')">Confirmar</button>
+        </div>
+    </div>
+</div>

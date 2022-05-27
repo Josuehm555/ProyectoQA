@@ -1,0 +1,36 @@
+<div class="container">
+    <hr>
+    <h5 class="p-3 titulo_formularios">Agregar Categoría</h5>
+    <hr>
+    <div id="stepper_categoria" class="bs-stepper">
+        <div class="bs-stepper-header">
+            <div class="step" data-target="#primer_paso">
+                <button class="step-trigger">
+                    <span class="bs-stepper-circle"><i class="fas fa-info"></i></span>
+                    <span class="bs-stepper-label">Información General</span>
+                </button>
+            </div>
+            <div class="line"></div>
+        </div>
+        <div class="bs-stepper-content">
+            <form [formGroup]="categoria_form">
+                <div id="primer_paso" class="content">
+                    <div class="form-group">
+                        <label for="nombre"><i class="fas fa-user"></i>Nombre</label>
+                        <input type="text" placeholder="Nombre" name="nombre" formControlName="nombre" class="form-control" required [ngClass]="{ 'is-invalid': enviado && form.nombre.errors }">
+                        <div *ngIf="enviado && form.nombre.errors" class="invalid-feedback">
+                            <div *ngIf="form.nombre.errors.required">
+                                <label class="font-weight-bold"><i class="fa fa-exclamation-circle"></i> El campo
+                                    del nombre es obligatorio</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="botones_navegacion">
+                        <button type="submit" class="btn btn-primary" [disabled]="cargando" (click)="crear_categoria()">
+                            <i *ngIf="cargando" class="fas fa-sync fa-spin"></i>Crear Categoría</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,95 @@
+*{
+    animation: fade_in_up 1s;
+    animation-fill-mode: forwards;
+}
+
+
+/*--------------------LINKS-------------------------*/
+
+a {
+    font-size: 14px;
+    line-height: 1.7;
+    color: var(--azul);
+    margin: 0px;
+    transition: all 0.4s;
+}
+
+a:focus {
+    outline: none !important;
+}
+
+a:hover {
+    text-decoration: none;
+    color: var(--rojizo);
+}
+
+/*--------------------BUTTONS-------------------------*/
+
+.form_btn {
+    width: 100%;
+}
+
+/*------------LOGIN------------------*/
+
+.wrap_form {
+    border-radius: 10px;
+    overflow: hidden;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 130px 130px 130px 130px;
+}
+
+/*---------------IMAGEN---------------------*/
+
+.form_imagen {
+    width: 400px;
+}
+
+.form_imagen img {
+    max-width: 100%;
+}
+
+/*--------------FORM---------------------*/
+
+._form {
+    width: 300px;
+}
+
+._form_titulo {
+    font-size: 24px;
+    color: #333333;
+    line-height: 1.2;
+    text-align: center;
+    width: 100%;
+    display: block;
+    padding-bottom: 5%;
+}
+
+/*-------------------INPUTS--------------------------*/
+
+.wrap_input_form {
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+/*------------------------------------------------------------------
+  [ Responsive ]*/
+
+@media (max-width: 992px) {
+    .wrap_form {
+        padding: 80px 80px 80px 80px;
+    }
+    .form_imagen {
+        display: none;
+    }
+    ._form {
+        width: 100%;
+    }
+}
+
+@media (max-width: 576px) {
+    .wrap_form {
+        padding: 15px 15px 15px 15px;
+    }
+}

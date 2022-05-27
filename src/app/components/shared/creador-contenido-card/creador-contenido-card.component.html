@@ -1,0 +1,14 @@
+<button class="card h-100 w-100 d-flex justify-content-center align-items-center border-0" (click)="ver_creador_contenido()">
+    <div class="card-header p-0 border-0">
+        <img *ngIf="creador_contenido.caracteristicas.imagen" class="card-img w-100" [src]="creador_contenido.caracteristicas.imagen" style="height: 200px; width: auto;" [alt]="creador_contenido.nombre">
+        <img *ngIf="!creador_contenido.caracteristicas.imagen" class="card-img w-100" src="https://oducal.com/web/images/sin_imagen.png" style="height: 200px; width: auto;" [alt]="creador_contenido.nombre">
+    </div>
+    <div class="card-body text-center">
+        <hr>
+        <span class="text-muted small">
+            {{creador_contenido.caracteristicas.provincia}}, {{creador_contenido.caracteristicas.canton}}
+        </span>
+        <h4 class="card-title">{{creador_contenido.nombre}}</h4>
+        <hr>
+    </div>
+</button>

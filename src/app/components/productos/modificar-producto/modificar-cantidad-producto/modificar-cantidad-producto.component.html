@@ -1,0 +1,36 @@
+<div [formGroup]="producto_form" class="mb-5">
+    <hr>
+    <h5 class="p-3 titulo_formularios">Modificar cantidad del producto — {{producto_titulo}}</h5>
+    <hr>
+    <div class="form-group" *ngIf="form_creado">
+        <label><i class="fas fa-magic"></i>Estilos</label>
+
+        <table class="table" formArrayName="estilos">
+            <tr *ngFor="let estilo of estilos.controls; let i=index" [formGroupName]="i" class="border-bottom">
+                <hr>
+                <td>
+                    <div class="form-group">
+                        <label for="nombre"><i class="fas fa-heading"></i>Nombre del estilo</label>
+                        <input type="text" class="form-control" placeholder="Nombre" formControlName="nombre" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="existencia"><i class="fas fa-dolly-flatbed"></i>Cantidad del producto</label>
+                        <input type="number" class="form-control" placeholder="Cantidad" formControlName="existencia" [ngClass]="{ 'is-invalid': (estilo.get('existencia')?.touched || enviado) && 
+                        estilo.get('existencia')?.errors }" required min="1">
+                        <div *ngIf="enviado && estilo.get('existencia')?.errors?.required" class="invalid-feedback">
+                            <div>
+                                <label class="font-weight-bold"><i class="fa fa-exclamation-circle"></i> El campo
+                                    de cantidad es obligatorio</label>
+                            </div>
+                        </div>
+                    </div>
+                </td>
+                <hr>
+            </tr>
+        </table>
+        <div class="botones_navegacion">
+            <button type="submit" class="btn btn-primary" [disabled]="cargando" (click)="modificar_producto()">
+                <i *ngIf="cargando" class="fas fa-sync fa-spin"></i>Modificar Producto</button>
+        </div>
+    </div>
+</div>

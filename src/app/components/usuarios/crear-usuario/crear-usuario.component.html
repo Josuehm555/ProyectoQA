@@ -1,0 +1,83 @@
+<div class="container">
+    <hr>
+    <h5 class="p-3 titulo_formularios">Agregar Usuario Creador de Contenido</h5>
+    <hr>
+    <div id="stepper1" class="bs-stepper">
+        <div class="bs-stepper-header">
+            <div class="step" data-target="#primer_paso">
+                <button class="step-trigger">
+                    <span class="bs-stepper-circle"><i class="fas fa-user"></i></span>
+                    <span class="bs-stepper-label">Tipo de Usuario</span>
+                </button>
+            </div>
+            <div class="line"></div>
+            <div class="step" data-target="#segundo_paso">
+                <button class="step-trigger">
+                    <span class="bs-stepper-circle"><i class="fas fa-info"></i></span>
+                    <span class="bs-stepper-label">Información General</span>
+                </button>
+            </div>
+            <div class="line"></div>
+            <div class="step" data-target="#tercer_paso">
+                <button class="step-trigger">
+                    <span class="bs-stepper-circle"><i class="fas fa-map-marker-alt"></i></span>
+                    <span class="bs-stepper-label">Ubicación</span>
+                </button>
+            </div>
+        </div>
+        <div class="bs-stepper-content">
+            <form [formGroup]="usuario_form">
+                <div id="primer_paso" class="content">
+                    <hr>
+                    <div class="form-group" formGroupName="caracteristicas">
+                        <label for="tipo"><i class="fas fa-user"></i> Tipo de Usuario</label>
+                        <select class="form-select form-control" aria-label="Eligir Tipo de Usuario" name="id_tipo" formControlName="id_tipo">
+                            <option value="2" selected>Creador de Contenido</option>
+                        </select>
+                    </div>
+                    <div class="botones_navegacion">
+                        <a (click)="anterior()" class="btn btn-primary m-2">Anterior</a>
+                        <a (click)="siguiente()" class="btn btn-primary">Siguiente</a>
+                    </div>
+                </div>
+                <div id="segundo_paso" class="content">
+                    <hr>
+                    <app-creador-contenido-form [formGroup]="usuario_form" [enviado]="enviado"></app-creador-contenido-form>
+                    <div class="botones_navegacion">
+                        <a (click)="anterior()" class="btn btn-primary m-2">Anterior</a>
+                        <a (click)="siguiente()" class="btn btn-primary">Siguiente</a>
+                    </div>
+                </div>
+                <div id="tercer_paso" class="content">
+                    <div class="form-group" formGroupName="caracteristicas">
+                        <label for="provincia"><i class="fas fa-map-marker"></i>Provincia</label>
+                        <select class="form-select form-control" id="provincia" (change)="obtener_cantones($any($event.target).value)" name="provincia" formControlName="provincia">
+                            <option *ngFor="let provincia of provincias; let i = index" [value]="provincia.id">
+                                {{provincia.nombre}}</option>
+                        </select>
+                    </div>
+                    <div class="form-group" formGroupName="caracteristicas">
+                        <label for="canton"><i class="fas fa-map-marker-alt"></i>Cantón</label>
+                        <select class="form-select form-control" id="canton" name="canton" formControlName="canton">
+                            <option *ngFor="let canton of cantones; let i = index" [value]="canton.id">
+                                {{canton.nombre}}</option>
+                        </select>
+                    </div>
+                    <div class="form-group" formGroupName="caracteristicas">
+                        <label for="tipo"><i class="fas fa-thumbtack"></i>Dirección Exacta<span class="text-muted">
+                                (opcional)</span></label>
+                        <div class="form-floating">
+                            <textarea class="form-control" id="direccion_exacta" name="direccion_exacta" formControlName="direccion_exacta"></textarea>
+                            <label for="direccion_exacta">Dirección</label>
+                        </div>
+                    </div>
+                    <div class="botones_navegacion">
+                        <button (click)="anterior()" class="btn btn-secondary m-2" [disabled]="cargando">Anterior</button>
+                        <button type="submit" class="btn btn-primary" [disabled]="cargando" (click)="crear_usuario()">
+                            <i *ngIf="cargando" class="fas fa-sync fa-spin"></i>Crear Usuario</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

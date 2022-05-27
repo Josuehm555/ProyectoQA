@@ -1,0 +1,59 @@
+.container {
+    padding: 5%;
+}
+
+.perfil {
+    width: calc(100% - 40px);
+    padding-top: 100px;
+    margin: 70px auto 30px;
+    background-color: #fff;
+}
+
+.perfil_img {
+    display: none;
+    position: absolute;
+    margin: none;
+    top: -90px;
+    left: 40%;
+    height: 180px;
+    width: 180px;
+    border: 10px solid #fff;
+    border-radius: 100%;
+    background: url("https://cdn-icons-png.flaticon.com/512/1946/1946429.png") center no-repeat;
+    background-size: cover;
+}
+
+.perfil_encabezado {
+    margin: 0 auto 10px;
+    padding: 10px;
+    text-align: center;
+}
+
+.nombre_usuario {
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 30px;
+    margin-bottom: 12px;
+}
+
+.grid_contenedor .texto{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 2vh;
+    overflow:auto;
+}
+
+@media screen and (max-width: 500px) {
+    .grid_contenedor .texto{
+        display: grid;
+        grid-template-columns: 1fr;
+    }
+}
+
+@media screen and (max-width: 990px) {
+    .perfil{
+        margin: auto;
+    }
+}
+
+/*Referencia: https://bootsnipp.com/snippets/oradP*/

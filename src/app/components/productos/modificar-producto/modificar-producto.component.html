@@ -1,0 +1,57 @@
+<div class="container">
+    <hr>
+    <h5 class="p-3 titulo_formularios">Modificar Producto</h5>
+    <hr>
+    <div id="stepper1" class="bs-stepper">
+        <div class="bs-stepper-header">
+            <div class="step" data-target="#segundo_paso">
+                <button class="step-trigger">
+                    <span class="bs-stepper-circle"><i class="fas fa-info"></i></span>
+                    <span class="bs-stepper-label">Información General</span>
+                </button>
+            </div>
+            <div class="line"></div>
+            <div class="step" data-target="#tercer_paso">
+                <button class="step-trigger">
+                    <span class="bs-stepper-circle"><i class="fas fa-magic"></i></span>
+                    <span class="bs-stepper-label">Estilos</span>
+                </button>
+            </div>
+        </div>
+        <div class="bs-stepper-content">
+            <form [formGroup]="producto_form">
+                <div id="segundo_paso" class="content">
+                    <div *ngIf="sub_form_creado">
+                        <hr>
+                        <app-albumes-form *ngIf="tipo_producto == 1" [enviado]="enviado" [modificar]="modificar">
+                        </app-albumes-form>
+                        <app-audifonos-form *ngIf="tipo_producto == 2" [enviado]="enviado" [modificar]="modificar">
+                        </app-audifonos-form>
+                        <app-parlantes-form *ngIf="tipo_producto == 3" [enviado]="enviado" [modificar]="modificar">
+                        </app-parlantes-form>
+                        <div class="botones_navegacion">
+                            <a (click)="anterior()" class="btn btn-secondary m-2">Anterior</a>
+                            <a (click)="siguiente()" class="btn btn-primary">Siguiente</a>
+                        </div>
+                    </div>
+                </div>
+                <div id="tercer_paso" class="content">
+                    <div *ngIf="sub_form_creado">
+                        <app-sin-estilos *ngIf="estilo=='sin_estilo'" [enviado]="enviado" [modificar]="modificar">
+                        </app-sin-estilos>
+                        <app-colores *ngIf="estilo=='colores'" [enviado]="enviado" [modificar]="modificar">
+                        </app-colores>
+                        <app-presentaciones *ngIf="estilo=='presentaciones'" [enviado]="enviado" [modificar]="modificar">
+                        </app-presentaciones>
+                        <div class="botones_navegacion">
+                            <button (click)="anterior()" class="btn btn-secondary m-2" [disabled]="cargando">Anterior</button>
+                            <button type="submit" class="btn btn-primary" [disabled]="cargando" (click)="modificar_producto()">
+                                <i *ngIf="cargando"
+                                    class="fas fa-sync fa-spin"></i>Modificar Producto</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

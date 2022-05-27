@@ -1,0 +1,39 @@
+<div class="container-fluid card">
+    <div class="card-title mt-4">
+        <h4>Productos</h4>
+        <hr>
+    </div>
+    <div class="card-body">
+        <a *ngIf="rol == '2'" type="button" class="btn btn-outline-primary" [routerLink]="['/inicio/crear-producto']"><i class="fas fa-plus me-2"></i>Agregar Nuevo Producto</a>
+        <div class="table-responsive mt-4">
+            <table datatable [dtOptions]="dtOptions"  [dtTrigger]="trigger_tabla" class="row-border hover table table-hover w-100">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Creador</th>
+                        <th>Tipo</th>
+                        <th>Acción</th>
+                    </tr>
+                </thead>
+                <tbody *ngIf="productos?.length != 0">
+                    <tr *ngFor="let producto of productos">
+                        <td>{{ producto.titulo }}</td>
+                        <td>{{ producto.nombre_creador }}</td>
+                        <td>{{ producto.caracteristicas.nombre_tipo }}</td>
+                        <td>
+                            <button class="btn btn-outline-info m-1" (click)="ver_producto(producto.id_producto)"><i class="fas fa-eye"></i></button>
+                            <a *ngIf="rol == '2'" class="btn btn-outline-success m-1"  [routerLink]="['/inicio/modificar-producto']" [state]="{ id: producto.id_producto}"><i class="fas fa-pen"></i></a>
+                            <a *ngIf="rol == '2'" class="btn btn-outline-secondary m-1"  [routerLink]="['/inicio/modificar-cantidad-producto']" [state]="{ id: producto.id_producto}"><i class="fas fa-boxes"></i></a>
+                            <button class="btn btn-outline-danger m-1" (click)="abrir_modal_eliminar(producto.id_producto, producto.titulo)"><i class="fas fa-trash"></i></button>
+                        </td>
+                    </tr>
+                </tbody>
+                <tbody *ngIf="productos?.length == 0">
+                    <tr>
+                        <td colspan="3" class="no-data-available">¡No hay datos!</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

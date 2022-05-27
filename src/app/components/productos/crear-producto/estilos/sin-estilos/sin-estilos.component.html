@@ -1,0 +1,55 @@
+<div [formGroup]="sin_estilos_form">
+    <div formArrayName="estilos">
+        <div *ngFor="let estilo of estilos.controls; let i=index" [formGroupName]="i">
+            <p class="text-center text-muted">Este producto aún no tiene estilos disponibles.</p>
+            <div class="form-group">
+                <label for="existencia"><i class="fas fa-dolly-flatbed"></i>Cantidad del Producto</label>
+                <input type="number" class="form-control" placeholder="Cantidad" formControlName="existencia" [ngClass]="{ 'is-invalid': (estilo.get('existencia')?.touched || enviado) && 
+                        estilo.get('existencia')?.errors }" required min="1">
+                <div *ngIf="enviado && estilo.get('existencia')?.errors?.required" class="invalid-feedback">
+                    <div>
+                        <label class="font-weight-bold"><i class="fa fa-exclamation-circle"></i> El campo
+                            de cantidad es obligatorio</label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group" formArrayName="fotos">
+                <label for="tipo"><i class="fas fa-images"></i>Imágenes</label>
+                <div class="text-danger" *ngIf="enviado && fotos(i).controls.length === 0">
+                    <label class="font-weight-bold">
+                        <i class="fa fa-exclamation-circle"></i> El estilo requiere por lo menos
+                        una imagen</label>
+                </div>
+                <table class="table tabla_imagenes">
+                    <tr class="p-5">
+                        <th>
+                            <button type="button" class="btn btn-outline-primary" (click)="agregar_foto(i)"><i
+                                    class="fas fa-plus"></i>Agregar
+                                Imagen</button>
+                        </th>
+                    </tr>
+                    <tr *ngFor="let foto of fotos(i).controls; let j=index">
+                        <hr class="w-50">
+                        <td>
+                            <input *ngIf="foto.value == null || foto.value == ''" type="file"
+                                accept="image/png, image/jpeg, image/jpg" (change)="leer_imagen($event, i, j)"
+                                required>
+                            <img *ngIf="foto.value != null || foto.value != ''" [src]="obtener_imagen(i,j)" alt="Imagen Seleccionada Producto Sin Estilo">
+                        </td>
+                        <td>
+                            <button class="btn btn-outline-danger" (click)="eliminar_foto(i, j)"><i
+                                    class="fas fa-trash"></i>Eliminar Imagen</button>
+                        </td>
+                        <td>
+                            <div class="text-danger">
+                                <label class="font-weight-bold"
+                                    *ngIf="(foto.touched || enviado) && (foto.value == null || foto.value == '')">
+                                    <i class="fa fa-exclamation-circle"></i> Debe subir una imagen</label>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

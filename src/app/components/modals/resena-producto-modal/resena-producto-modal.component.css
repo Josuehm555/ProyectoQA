@@ -1,0 +1,45 @@
+.comment-area textarea {
+    resize: none;
+    border: 1px solid #ad9f9f
+}
+
+.form-control:focus {
+    color: #495057;
+    background-color: #fff;
+    border-color: #ffffff;
+    outline: 0;
+    box-shadow: 0 0 0 1px rgb(255, 0, 0) !important
+}
+
+.estrella {
+    font-size: 2rem;
+    color: #b0c4de;
+}
+
+.rellenado {
+    color: sandybrown;
+}
+
+.btn-primary {
+    background-color: var(--rojizo) !important;
+}
+
+.grid_contenedor {
+    width: 75%;
+    display: grid;
+    grid-template-rows: 1fr;
+    grid-row-gap: 10px;
+}
+
+.grid_contenedor .criterio {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-column-gap: 10px;
+}
+
+@media screen and (max-width: 400px) {
+    .grid_contenedor .criterio {
+        display: grid;
+        grid-template-columns: 1fr;
+    }
+}
